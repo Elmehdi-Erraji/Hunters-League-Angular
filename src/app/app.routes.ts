@@ -1,18 +1,49 @@
 import { Routes } from '@angular/router';
-import {AboutComponent} from './about/about.component';
-import {HomeComponent} from './home/home.component';
-import {ContactComponent} from './contact/contact.component';
-import {LoginComponent} from './auth/login/login.component';
-import {RegisterComponent} from './auth/register/register.component';
-import {ProfileComponent} from './auth/profile/profile.component';
-import {AuthGuard} from './auth/auth-guard.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import {AdminDashboardComponent} from './admin/admin-dashboard/admin-dashboard.component';
+import {JuryDashboardComponent} from './jury/jury-dashboard/jury-dashboard.component';
+import {MemberDashboardComponent} from './member/member-dashboard/member-dashboard.component';
+import {RoleGuard} from './core/guards/role.guard';
+import {AuthGuard} from './core/guards/auth.guard';
+import {ProfileComponent} from './profile/profile.component';
+
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'contact', component: ContactComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  // Default route
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
+  // Auth routes
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  // Profile (protected)
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+
+  // Admin Dashboard (protected by RoleGuard)
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['ADMIN'] }
+  },
+
+  // Jury Dashboard
+  {
+    path: 'jury',
+    component: JuryDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['JURY'] }
+  },
+
+  // Member Dashboard
+  {
+    path: 'member',
+    component: MemberDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['MEMBER'] }
+  },
+
+  // Wildcard route for invalid paths
+  { path: '**', redirectTo: 'login' }
 ];

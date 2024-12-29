@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -41,8 +40,8 @@ export class LoginComponent {
 
           console.log('Login successful:', response);
 
-          // Redirect to profile
-          this.router.navigate(['/profile']);
+          // Redirect based on role
+          this.redirectUser(response.role);
         },
         error: (err) => {
           console.error('Login Failed:', err);
@@ -58,6 +57,24 @@ export class LoginComponent {
       setTimeout(() => {
         this.errorMessage = '';
       }, 5000);
+    }
+  }
+
+  // Redirect user based on role
+  private redirectUser(role: string): void {
+    switch (role) {
+      case 'ADMIN':
+        this.router.navigate(['/admin']);
+        break;
+      case 'JURY':
+        this.router.navigate(['/jury']);
+        break;
+      case 'MEMBER':
+        this.router.navigate(['/member']);
+        break;
+      default:
+        this.router.navigate(['/login']);
+        break;
     }
   }
 }
