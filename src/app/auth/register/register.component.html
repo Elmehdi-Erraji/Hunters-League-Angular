@@ -1,0 +1,81 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <form [formGroup]="form" (ngSubmit)="register()" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Register</h2>
+
+    <!-- Success Popup -->
+    <div *ngIf="successMessage" class="bg-green-500 text-white text-center py-2 mb-4 rounded">
+      {{ successMessage }}
+    </div>
+
+    <!-- Error Alert -->
+    <div *ngIf="errorMessage" class="bg-red-500 text-white text-center py-2 mb-4 rounded">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Username -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+      <input type="text" formControlName="username" placeholder="Username"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('username')" class="text-red-500 text-xs italic">{{ getErrorMessage('username') }}</p>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+      <input type="password" formControlName="password" placeholder="Password"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('password')" class="text-red-500 text-xs italic">{{ getErrorMessage('password') }}</p>
+    </div>
+
+    <!-- First Name -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+      <input type="text" formControlName="firstName" placeholder="First Name"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('firstName')" class="text-red-500 text-xs italic">{{ getErrorMessage('firstName') }}</p>
+    </div>
+
+    <!-- Last Name -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+      <input type="text" formControlName="lastName" placeholder="Last Name"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('lastName')" class="text-red-500 text-xs italic">{{ getErrorMessage('lastName') }}</p>
+    </div>
+
+    <!-- CIN -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">CIN</label>
+      <input type="text" formControlName="cin" placeholder="CIN"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('cin')" class="text-red-500 text-xs italic">{{ getErrorMessage('cin') }}</p>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+      <input type="email" formControlName="email" placeholder="Email"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('email')" class="text-red-500 text-xs italic">{{ getErrorMessage('email') }}</p>
+    </div>
+
+    <!-- Nationality -->
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2">Nationality</label>
+      <input type="text" formControlName="nationality" placeholder="Nationality"
+             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <p *ngIf="isInvalid('nationality')" class="text-red-500 text-xs italic">{{ getErrorMessage('nationality') }}</p>
+    </div>
+
+    <!-- Submit -->
+    <div class="flex items-center justify-between">
+      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Register
+      </button>
+      <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <a href="/login">Login ?</a>
+      </button>
+    </div>
+  </form>
+</div>
