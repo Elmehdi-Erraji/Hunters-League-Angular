@@ -1,1 +1,83 @@
-<p>header works!</p>
+<header
+  class="sticky top-0 z-999 flex w-full bg-white drop-shadow-md dark:bg-gray-800 dark:drop-shadow-none"
+>
+  <div class="flex flex-grow items-center justify-between px-4 py-4 md:px-6 2xl:px-11">
+    <!-- Hamburger Menu -->
+    <div class="flex items-center gap-2 lg:hidden">
+      <button (click)="toggleSidebar.emit()" class="rounded-sm border p-1.5 shadow-sm dark:border-gray-600 dark:bg-gray-800">
+        ☰
+      </button>
+      <a href="/">
+        <img src="assets/logo.png" alt="Logo" />
+      </a>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="hidden sm:block">
+      <form>
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="w-full bg-transparent pl-9 pr-4 focus:outline-none xl:w-125"
+          />
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Menu -->
+    <div class="flex items-center gap-3">
+      <ul class="flex items-center gap-2">
+        <!-- Dark Mode Toggle -->
+        <li>
+          <label
+            (click)="toggleDarkMode()"
+            class="relative block h-7.5 w-14 rounded-full cursor-pointer"
+            [ngClass]="{'bg-primary': darkMode, 'bg-gray-300': !darkMode}"
+          >
+            <span
+              class="absolute top-1 left-1 h-6 w-6 rounded-full bg-white shadow-md transition-transform"
+              [ngClass]="{'translate-x-7': darkMode}"
+            ></span>
+          </label>
+        </li>
+
+        <!-- Notifications -->
+        <li class="relative">
+          <a class="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 hover:text-primary dark:bg-gray-700 dark:text-white" href="#">
+            🔔
+            <span class="absolute -top-1 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+          </a>
+        </li>
+
+        <!-- Messages -->
+        <li class="relative">
+          <a class="relative flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 hover:text-primary dark:bg-gray-700 dark:text-white" href="#">
+            💬
+            <span class="absolute -top-1 right-0 h-2 w-2 rounded-full bg-green-500"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile -->
+      <div class="relative flex items-center gap-4">
+        <div>
+          <span class="block text-sm font-medium text-gray-800 dark:text-white">Thomas Anree</span>
+          <span class="block text-xs font-medium text-gray-500 dark:text-gray-400">UX Designer</span>
+        </div>
+        <img src="assets/user.png" alt="User" class="h-12 w-12 rounded-full" />
+
+        <!-- Dropdown -->
+        <div class="absolute right-0 mt-10 w-40 bg-white shadow-md rounded-sm dark:bg-gray-800">
+          <ul>
+            <li><a href="/profile" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Profile</a></li>
+            <li><a href="/settings" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Settings</a></li>
+            <li>
+              <button (click)="logout()" class="block w-full text-left px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Logout</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

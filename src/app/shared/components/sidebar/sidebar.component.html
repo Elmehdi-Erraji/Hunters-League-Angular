@@ -1,1 +1,76 @@
-<p>sidebar works!</p>
+<aside
+  [ngClass]="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
+  class="absolute left-0 top-0 z-50 flex h-screen w-72 flex-col overflow-y-hidden bg-black duration-300 ease-linear lg:static lg:translate-x-0"
+>
+  <!-- Sidebar Header -->
+  <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+    <a href="/">
+      <img src="assets/logo.svg" alt="Logo" />
+    </a>
+
+    <!-- Toggle Button -->
+    <button class="lg:hidden" (click)="toggleSidebar()">
+      ☰
+    </button>
+  </div>
+  <!-- Sidebar Header -->
+
+  <!-- Sidebar Menu -->
+  <nav class="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
+    <div>
+      <h3 class="mb-4 ml-4 text-sm font-medium text-gray-500">MENU</h3>
+      <ul class="mb-6 flex flex-col gap-1.5">
+        <!-- Dashboard -->
+        <li>
+          <a
+            routerLink="/admin"
+            class="flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white hover:bg-gray-700"
+          >
+            📊 Dashboard
+          </a>
+        </li>
+
+        <!-- Competitions -->
+        <li>
+          <a
+            routerLink="/competitions"
+            class="flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white hover:bg-gray-700"
+          >
+            🏆 Competitions
+          </a>
+        </li>
+
+        <!-- Species -->
+        <li>
+          <a
+            routerLink="/species"
+            class="flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white hover:bg-gray-700"
+          >
+            🐾 Species
+          </a>
+        </li>
+
+        <!-- Users -->
+        <li>
+          <a
+            routerLink="/users"
+            class="flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white hover:bg-gray-700"
+          >
+            👥 Users
+          </a>
+        </li>
+
+        <!-- Settings -->
+        <li>
+          <a
+            routerLink="/settings"
+            class="flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-white hover:bg-gray-700"
+          >
+            ⚙️ Settings
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Sidebar Menu -->
+</aside>
