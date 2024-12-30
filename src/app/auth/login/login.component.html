@@ -1,38 +1,38 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <form [formGroup]="form" (ngSubmit)="login()" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Login</h2>
+<!--<div class="min-h-screen flex items-center justify-center bg-gray-100">-->
+<!--  <form [formGroup]="form" (ngSubmit)="login()" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-full max-w-md">-->
+<!--    <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Login</h2>-->
 
-    <!-- Error Alert -->
-    <div *ngIf="errorMessage" class="bg-red-500 text-white text-center py-2 mb-4 rounded">
-      {{ errorMessage }}
-    </div>
+<!--    &lt;!&ndash; Error Alert &ndash;&gt;-->
+<!--    <div *ngIf="errorMessage" class="bg-red-500 text-white text-center py-2 mb-4 rounded">-->
+<!--      {{ errorMessage }}-->
+<!--    </div>-->
 
-    <!-- Username -->
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-      <input type="text" formControlName="username" placeholder="Username"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <p *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
-         class="text-red-500 text-xs italic">Username is required (min 3 chars).</p>
-    </div>
+<!--    &lt;!&ndash; Username &ndash;&gt;-->
+<!--    <div class="mb-4">-->
+<!--      <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>-->
+<!--      <input type="text" formControlName="username" placeholder="Username"-->
+<!--             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">-->
+<!--      <p *ngIf="form.get('username')?.invalid && form.get('username')?.touched"-->
+<!--         class="text-red-500 text-xs italic">Username is required (min 3 chars).</p>-->
+<!--    </div>-->
 
-    <!-- Password -->
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-      <input type="password" formControlName="password" placeholder="Password"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-         class="text-red-500 text-xs italic">Password is required (min 6 chars).</p>
-    </div>
+<!--    &lt;!&ndash; Password &ndash;&gt;-->
+<!--    <div class="mb-4">-->
+<!--      <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>-->
+<!--      <input type="password" formControlName="password" placeholder="Password"-->
+<!--             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">-->
+<!--      <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched"-->
+<!--         class="text-red-500 text-xs italic">Password is required (min 6 chars).</p>-->
+<!--    </div>-->
 
-    <!-- Submit Button -->
-    <div class="flex items-center justify-between">
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Login
-      </button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        <a href="/register">Create an account </a>
-      </button>
-    </div>
-  </form>
-</div>
+<!--    &lt;!&ndash; Submit Button &ndash;&gt;-->
+<!--    <div class="flex items-center justify-between">-->
+<!--      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">-->
+<!--        Login-->
+<!--      </button>-->
+<!--      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">-->
+<!--        <a href="/register">Create an account </a>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->

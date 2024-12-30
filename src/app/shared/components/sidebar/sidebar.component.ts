@@ -1,18 +1,10 @@
-import { Component, Input } from '@angular/core';
-import {NgClass} from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  imports: [
-    NgClass
-  ],
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
+  standalone: true, // Add standalone
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add schema here
 })
-export class SidebarComponent {
-  @Input() sidebarOpen: boolean = false; // Toggle state for sidebar
-
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-}
+export class SidebarComponent { }

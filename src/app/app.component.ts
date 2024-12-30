@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+// Declare external libraries if required (e.g., jQuery)
+declare var $: any;
+
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // Fixed typo here
 })
 export class AppComponent {
-  title = 'angular-playground';
+
 }
