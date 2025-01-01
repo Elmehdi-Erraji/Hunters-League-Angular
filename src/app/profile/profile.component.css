@@ -3,28 +3,4 @@ header.topbar {
   color: var(--bs-body-color) !important;         /* Dynamic text color */
   border-bottom: 1px solid var(--bs-border-color); /* Dynamic border */
 }
-.main-nav {
-  width: 240px;
-  transition: width 0.3s ease;
-}
 
-.main-nav.collapsed {
-  width: 60px; /* Collapsed width */
-  overflow: hidden;
-}
-
-.main-nav.collapsed .nav-text {
-  display: none; /* Hide text */
-}
-
-.main-nav.collapsed .logo-lg {
-  display: none; /* Hide large logo */
-}
-
-.main-nav .logo-sm {
-  display: none;
-}
-
-.main-nav.collapsed .logo-sm {
-  display: inline-block; /* Show small logo */
-}

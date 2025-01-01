@@ -1,36 +1,53 @@
-import { Component, AfterViewInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {HeaderComponent} from '../shared/components/header/header.component';
+import {SidebarComponent} from '../shared/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Add schema here
+  imports: [
+    HeaderComponent,
+    SidebarComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ProfileComponent implements AfterViewInit {
+export class ProfileComponent {
+  constructor() {
+    // Wait for DOM to load completely
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM fully loaded and parsed!');
 
-  ngAfterViewInit(): void {
-    setTimeout(() => {
+      /** ==============================================
+       *  Sidebar Toggle
+       * ============================================== */
+      const sidebarToggleButton = document.getElementById('sidebar-toggle'); // Button
+      const sidebar = document.getElementById('left-sidebar'); // Sidebar
+
+      if (!sidebarToggleButton || !sidebar) {
+        console.error('Sidebar or toggle button not found!');
+      } else {
+        console.log('Sidebar toggle initialized!');
+        sidebarToggleButton.addEventListener('click', () => {
+          sidebar.classList.toggle('collapsed'); // Toggle collapsed class
+        });
+      }
+
       /** ==============================================
        *  Light/Dark Mode Toggle
        * ============================================== */
       const themeToggleButton = document.getElementById('light-dark-mode');
-
-      if (!themeToggleButton) {
-        console.error('Theme toggle button not found!');
-      } else {
-        // Check current theme from localStorage
+      if (themeToggleButton) {
         const isDarkMode = localStorage.getItem('theme') === 'dark';
         if (isDarkMode) {
           document.body.setAttribute('data-bs-theme', 'dark');
         }
-
-        // Add click event listener for toggling theme
         themeToggleButton.addEventListener('click', () => {
           const currentTheme = document.body.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
           document.body.setAttribute('data-bs-theme', currentTheme);
-          localStorage.setItem('theme', currentTheme); // Save the theme preference
+          localStorage.setItem('theme', currentTheme);
         });
       }
-    }, 0); // Ensure DOM is rendered before executing the logic
+    });
   }
 }

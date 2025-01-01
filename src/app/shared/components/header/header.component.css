@@ -1,0 +1,5 @@
+header.topbar {
+  background-color: var(--bs-body-bg) !important; /* Dynamic background */
+  color: var(--bs-body-color) !important;         /* Dynamic text color */
+  border-bottom: 1px solid var(--bs-border-color); /* Dynamic border */
+}
