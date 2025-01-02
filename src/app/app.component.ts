@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './core/interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'angular-playground';
-}
+export class AppComponent {}
