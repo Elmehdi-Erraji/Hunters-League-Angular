@@ -1,41 +1,16 @@
-<!-- START Wrapper -->
-<div class="wrapper">
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Profile</h2>
 
- <app-header></app-header>
-  <!-- ========== App Menu Start ========== -->
-  <app-sidebar></app-sidebar>
-  <!-- ========== App Menu End ========== -->
+    <!-- Display Role -->
+    <p class="text-gray-700 text-center mb-4">Role: <strong>{{ role }}</strong></p>
 
-  <!-- ==================================================== -->
-  <!-- Start right Content here -->
-  <!-- ==================================================== -->
-  <div class="page-content">
-
-    <!-- Start Container Fluid -->
-    <div class="container-xxl">
-
-      <!-- Start here.... -->
-
+    <!-- Logout Button -->
+    <div class="flex justify-center">
+      <button (click)="logout()"
+              class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Logout
+      </button>
     </div>
-    <!-- End Container Fluid -->
-
-    <!-- ========== Footer Start ========== -->
-    <footer class="footer">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12 text-center">
-            <script>document.write(new Date().getFullYear())</script> &copy; Larkon. Crafted by <iconify-icon icon="iconamoon:heart-duotone" class="fs-18 align-middle text-danger"></iconify-icon> <a
-            href="https://1.envato.market/techzaa" class="fw-bold footer-text" target="_blank">Techzaa</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- ========== Footer End ========== -->
-
   </div>
-  <!-- ==================================================== -->
-  <!-- End Page Content -->
-  <!-- ==================================================== -->
-
 </div>
-<!-- END Wrapper -->

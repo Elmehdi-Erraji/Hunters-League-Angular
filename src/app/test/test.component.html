@@ -3,9 +3,47 @@
 <div class="wrapper">
 
   <!-- ========== Topbar Start ========== -->
-    <app-header></app-header>
+    <header class="topbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="d-flex align-items-center">
+                    <!-- Menu Toggle Button -->
+                    <div class="topbar-item">
+                        <button type="button" class="button-toggle-menu me-2" (click)="toggleMenu()">
+                            <iconify-icon icon="solar:hamburger-menu-broken" class="fs-24 align-middle"></iconify-icon>
+                        </button>
+                    </div>
 
-  <!-- Activity Timeline -->
+                    <!-- Welcome Text -->
+                    <div class="topbar-item">
+                        <h4 class="fw-bold topbar-button pe-none text-uppercase mb-0">Welcome</h4>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-1">
+                    <!-- Theme Toggle Button -->
+                    <div class="topbar-item">
+                        <button type="button" class="topbar-button" id="light-dark-mode">
+                            <iconify-icon [attr.icon]="currentTheme === 'dark' ? 'solar:sun-bold-duotone' : 'solar:moon-bold-duotone'"
+                                          class="fs-24 align-middle"></iconify-icon>
+                        </button>
+                    </div>
+
+                    <!-- User Profile -->
+                    <div class="dropdown topbar-item">
+                        <a type="button" class="topbar-button" id="page-header-user-dropdown" data-bs-toggle="dropdown">
+            <span class="d-flex align-items-center">
+              <img class="rounded-circle" width="32" src="./assets/images/users/avatar-1.jpg" alt="avatar-3">
+            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Activity Timeline -->
   <div>
     <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="theme-activity-offcanvas" style="max-width: 450px; width: 100%;">
       <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">

@@ -28,17 +28,10 @@
               }
             ],
             "styles": [
-              "src/assets/css/vendor.min.css",
-              "src/assets/css/icons.min.css",
-              "src/assets/css/app.min.css"
+
             ],
             "scripts": [
-              "src/assets/js/vendor.js",
-              "src/assets/js/app.js",
-              "src/assets/vendor/jsvectormap/js/jsvectormap.min.js",
-              "src/assets/vendor/jsvectormap/maps/world-merc.js",
-              "src/assets/vendor/jsvectormap/maps/world.js",
-              "src/assets/js/pages/dashboard.js"
+
             ]
           },
           "configurations": {
