@@ -17,10 +17,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of paginatedUsers" class="hover:bg-gray-50">
+      <tr *ngFor="let user of paginatedUsersWithColors" class="hover:bg-gray-50">
         <!-- Avatar with first letter and random color -->
         <td class="p-3 border">
-          <div [ngStyle]="{'background-color': getRandomColor()}"
+          <div [ngStyle]="{'background-color': user.color}"
                class="w-8 h-8 flex items-center justify-center rounded-full text-white font-bold">
             {{ user.firstName.charAt(0).toUpperCase() }}
           </div>

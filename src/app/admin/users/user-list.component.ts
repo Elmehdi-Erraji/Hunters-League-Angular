@@ -11,12 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class UserListComponent implements OnInit {
   // Data Variables
-  paginatedUsers: any[] = [];   // Users to display for the current page
+  paginatedUsersWithColors: any[] = []; // Users with precomputed colors
 
   // Pagination Variables
   totalPages = 0;               // Total pages
   currentPage = 0;              // Current active page
-  pageSize = 10;                 // Number of items per page
+  pageSize = 10;                // Number of items per page
   totalElements = 0;            // Total number of elements
 
   // Loading State
@@ -38,9 +38,12 @@ export class UserListComponent implements OnInit {
       next: (response) => {
         console.log('API response received:', response);
 
-        // Use response directly as paginated data
-        this.paginatedUsers = response || [];
-        console.log('Paginated Users:', this.paginatedUsers);
+        // Precompute colors and assign to each user
+        this.paginatedUsersWithColors = response.map((user: any) => ({
+          ...user,
+          color: this.getRandomColor() // Assign a random color once
+        }));
+        console.log('Paginated Users with Colors:', this.paginatedUsersWithColors);
 
         // Update pagination info
         this.currentPage = page; // Update the current page
@@ -50,7 +53,7 @@ export class UserListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching users:', error);
-        this.paginatedUsers = [];
+        this.paginatedUsersWithColors = [];
         this.totalPages = 0;
       },
       complete: () => {
@@ -81,9 +84,11 @@ export class UserListComponent implements OnInit {
       console.log('Already on the first page, cannot move to previous page.');
     }
   }
+
   testClick(): void {
     console.log('Test button clicked!');
   }
+
   // Go to a specific page
   goToPage(page: number): void {
     console.log(`Page number ${page + 1} clicked`);
@@ -110,9 +115,9 @@ export class UserListComponent implements OnInit {
     // Implement delete logic here
   }
 
-// Generate random color for avatars
+  // Generate random color for avatars
   getRandomColor(): string {
-    const colors =  ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB'];
+    const colors = ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB']; // Gray shades
     return colors[Math.floor(Math.random() * colors.length)];
   }
 }
