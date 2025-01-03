@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AdminSpecyService} from '../services/admin-specy.service';
+import { AdminSpecyService } from '../services/admin-specy.service';
 
 @Component({
   selector: 'app-specie-list',
@@ -16,7 +16,7 @@ export class SpecieListComponent implements OnInit {
   // Pagination Variables
   totalPages = 0;               // Total pages
   currentPage = 0;              // Current active page
-  pageSize = 10;                // Number of items per page
+  pageSize = 10;                 // Number of items per page (default to 2 as per your API response)
   totalElements = 0;            // Total number of elements
 
   // Loading State
@@ -38,17 +38,17 @@ export class SpecieListComponent implements OnInit {
       next: (response) => {
         console.log('API response received:', response);
 
-        // Precompute colors and assign to each species
+        // Assign response data
         this.paginatedSpeciesWithColors = response.species.map((species: any) => ({
           ...species,
           color: this.getRandomColor() // Assign a random color once
         }));
-        console.log('Paginated Species with Colors:', this.paginatedSpeciesWithColors);
 
-        // Update pagination info
-        this.currentPage = page; // Update the current page
-        this.totalElements = response.totalElements || 0; // Get total elements
-        this.totalPages = Math.ceil(this.totalElements / size); // Calculate total pages
+        // Update pagination info directly from response
+        this.currentPage = response.pageNumber;
+        this.totalPages = response.totalPages;
+        this.totalElements = response.totalElements;
+
         console.log(`Updated currentPage: ${this.currentPage}, totalPages: ${this.totalPages}`);
       },
       error: (error) => {
@@ -65,40 +65,32 @@ export class SpecieListComponent implements OnInit {
 
   // Next Page
   nextPage(): void {
-    console.log('Next button clicked');
     if (this.currentPage < this.totalPages - 1) {
-      console.log(`Moving to next page: ${this.currentPage + 1}`);
       this.getSpecies(this.currentPage + 1, this.pageSize);
-    } else {
-      console.log('Already on the last page, cannot move to next page.');
     }
   }
 
   // Previous Page
   prevPage(): void {
-    console.log('Previous button clicked');
     if (this.currentPage > 0) {
-      console.log(`Moving to previous page: ${this.currentPage - 1}`);
       this.getSpecies(this.currentPage - 1, this.pageSize);
-    } else {
-      console.log('Already on the first page, cannot move to previous page.');
     }
   }
 
-  // Go to a specific page
+  // Go to specific page
   goToPage(page: number): void {
-    console.log(`Page number ${page + 1} clicked`);
-    if (page >= 0 && page < this.totalPages) {
-      this.getSpecies(page, this.pageSize);
-    } else {
-      console.log(`Invalid page number: ${page + 1}`);
-    }
+    this.getSpecies(page, this.pageSize);
   }
 
   // Generate an array for page numbers
   getPagesArray(): number[] {
-    console.log(`Generating page numbers array for totalPages: ${this.totalPages}`);
-    return Array.from({ length: this.totalPages }, (_, i) => i); // Generate an array [0, 1, 2, ...]
+    return Array.from({ length: this.totalPages }, (_, i) => i);
+  }
+
+  // Generate random color for avatars
+  getRandomColor(): string {
+    const colors = ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB']; // Gray shades
+    return colors[Math.floor(Math.random() * colors.length)];
   }
 
   editSpecies(species: any): void {
@@ -109,11 +101,5 @@ export class SpecieListComponent implements OnInit {
   deleteSpecies(speciesId: string): void {
     console.log('Delete species with ID:', speciesId);
     // Implement delete logic here
-  }
-
-  // Generate random color for avatars
-  getRandomColor(): string {
-    const colors = ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB']; // Gray shades
-    return colors[Math.floor(Math.random() * colors.length)];
   }
 }

@@ -57,6 +57,7 @@
     <!-- Next Button -->
     <button
       (click)="nextPage()"
+      [disabled]="currentPage === totalPages - 1"
       class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
     >
       Next
@@ -65,11 +66,8 @@
 
   <!-- Page Numbers -->
   <div class="flex justify-center mt-4 space-x-2">
-    <button *ngFor="let page of [].constructor(totalPages); let i = index"
-            (click)="getSpecies(i, pageSize)"
-            [class.bg-gray-800]="currentPage === i"
+    <button
             class="bg-gray-700 text-white px-3 py-2 rounded-lg hover:bg-gray-800">
-      {{ i + 1 }}
     </button>
   </div>
 
