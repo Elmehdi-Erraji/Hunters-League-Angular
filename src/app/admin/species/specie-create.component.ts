@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminSpecyService } from '../services/admin-specy.service';
 import { NgIf } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
   selector: 'app-specie-create',
@@ -16,21 +18,25 @@ export class SpecieCreateComponent {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private specieService: AdminSpecyService) {
+  constructor(
+    private fb: FormBuilder,
+    private specieService: AdminSpecyService,
+    private router: Router // Inject Router
+  ) {
     // Initialize the form
     this.specieForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       category: ['', [Validators.required]],
-      minimumWeight: [0, [Validators.required, Validators.min(0.01)]],
+      minimumWeight: [null, [Validators.required, Validators.min(0.01)]],
       difficulty: ['', [Validators.required]],
-      points: [0, [Validators.required, Validators.min(1)]]
+      points: [null, [Validators.required, Validators.min(1)]]
     });
   }
 
   // Submit Form
   onSubmit(): void {
     if (this.specieForm.invalid) {
-      return; // Do nothing if the form is invalid
+      return; // Stop if the form is invalid
     }
 
     this.loading = true; // Start loading
@@ -43,7 +49,9 @@ export class SpecieCreateComponent {
       next: (response) => {
         console.log('Specie created successfully:', response);
         this.successMessage = 'Specie created successfully!';
-        this.specieForm.reset(); // Clear the form
+        setTimeout(() => {
+          this.router.navigate(['/admin/species/list']); // Redirect to species list after 2 seconds
+        }, 2000); // Optional delay to show success message
       },
       error: (error) => {
         console.error('Error creating specie:', error);

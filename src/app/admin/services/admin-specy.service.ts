@@ -34,7 +34,13 @@ export class AdminSpecyService {
 
   // Create species
   createSpecies(species: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/create`, species);
+    return this.http.post(`${this.apiUrl}/create`, species,{
+
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      responseType: 'text'
+    });
   }
 
   // Update species

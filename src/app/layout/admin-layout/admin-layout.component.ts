@@ -1,5 +1,5 @@
 import {Component, HostListener} from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 
 @Component({
@@ -23,7 +23,7 @@ export class AdminLayoutComponent {
     members: false,
     results: false
   }; // Sidebar dropdown states
-
+  constructor(private router: Router) {}
   ngOnInit() {
     this.checkScreenSize(); // Initial check
   }
@@ -65,5 +65,14 @@ export class AdminLayoutComponent {
   // Sidebar dropdown toggle
   toggleSidebarDropdown(section: string) {
     this.dropdowns[section] = !this.dropdowns[section];
+  }
+  logout() {
+    // Clear tokens and role
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('role');
+
+    // Redirect to login
+    this.router.navigate(['/login']);
   }
 }

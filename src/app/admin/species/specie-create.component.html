@@ -28,9 +28,9 @@
       <div class="relative">
         <select id="category" formControlName="category"
                 class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-gray-300 focus:outline-none appearance-none bg-white">
-          <option value="">Select Category</option>
+          <option value="SEA">SEA</option>
           <option value="BIRD">Bird</option>
-          <option value="MAMMAL">Mammal</option>
+          <option value="BIG_GAME">BIG_GAME</option>
         </select>
       </div>
       <span *ngIf="specieForm.get('category')?.invalid && specieForm.get('category')?.touched" class="text-red-500 text-sm">Category is required.</span>
@@ -55,6 +55,7 @@
           <option value="COMMON">Common</option>
           <option value="RARE">Rare</option>
           <option value="EPIC">Epic</option>
+          <option value="EPIC">LEGENDARY</option>
         </select>
       </div>
       <span *ngIf="specieForm.get('difficulty')?.invalid && specieForm.get('difficulty')?.touched" class="text-red-500 text-sm">Difficulty is required.</span>

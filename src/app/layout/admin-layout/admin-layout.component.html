@@ -201,11 +201,13 @@
       <div class="relative">
         <div class="relative">
           <img
-            ngSrc="1.jpg"
+            [src]="'/images/a.png'"
             alt="Profile"
-            class="w-10 h-10 rounded-full cursor-pointer"
+            width="40"
+            height="40"
+            class="w-10 h-10 rounded-full cursor-pointer object-cover"
             (click)="toggleDropdown()"
-            fill/>
+          />
         </div>
         <div
           *ngIf="isDropdownOpen"
@@ -217,8 +219,11 @@
           <a href="/settings" class="flex items-center px-4 py-2 hover:bg-gray-100">
             <span class="material-icons mr-2 text-[#47a146]">settings</span> Settings
           </a>
-          <a href="/logout" class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-500">
-            <span class="material-icons mr-2 text-red-500">logout</span> Logout
+          <a  class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-500">
+            <button (click)="logout()"
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Logout
+            </button>
           </a>
         </div>
       </div>
