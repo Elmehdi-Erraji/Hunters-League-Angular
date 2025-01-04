@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgOptimizedImage],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -45,7 +45,15 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login Failed:', err);
-          this.errorMessage = err.error.message || 'Invalid username or password.';
+
+          // Check for 401 status and set appropriate error message
+          if (err.status === 401) {
+            this.errorMessage = 'Invalid username or password.';
+          } else {
+            this.errorMessage = 'An error occurred. Please try again.';
+          }
+
+          // Clear the error message after 5 seconds
           setTimeout(() => {
             this.errorMessage = '';
           }, 5000);
@@ -59,6 +67,7 @@ export class LoginComponent {
       }, 5000);
     }
   }
+
 
   // Redirect user based on role
   private redirectUser(role: string): void {

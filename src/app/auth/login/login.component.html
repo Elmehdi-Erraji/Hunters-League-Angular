@@ -1,38 +1,57 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
-  <form [formGroup]="form" (ngSubmit)="login()" class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Login</h2>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-500">
+  <div class="flex flex-wrap w-full max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
 
-    <!-- Error Alert -->
-    <div *ngIf="errorMessage" class="bg-red-500 text-white text-center py-2 mb-4 rounded">
-      {{ errorMessage }}
+    <!-- Image Section -->
+    <div class="hidden md:block w-1/2 bg-cover bg-center" style="background-image: url('/images/2.jpg')">
     </div>
 
-    <!-- Username -->
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-      <input type="text" formControlName="username" placeholder="Username"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <p *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
-         class="text-red-500 text-xs italic">Username is required (min 3 chars).</p>
-    </div>
+    <!-- Form Section -->
+    <div class="w-full md:w-1/2 p-8">
+      <h2 class="text-3xl font-bold mb-6 text-center text-gray-700">Login</h2>
 
-    <!-- Password -->
-    <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-      <input type="password" formControlName="password" placeholder="Password"
-             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-         class="text-red-500 text-xs italic">Password is required (min 6 chars).</p>
-    </div>
+      <!-- Error Alert -->
+      <div *ngIf="errorMessage" class="bg-red-500 text-white text-center py-2 mb-4 rounded">
+        {{ errorMessage }}
+      </div>
 
-    <!-- Submit Button -->
-    <div class="flex items-center justify-between">
-      <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Login
-      </button>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        <a href="/register">Create an account </a>
-      </button>
+      <!-- Login Form -->
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <!-- Username -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+          <input type="text" formControlName="username" placeholder="Username"
+                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <p *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+             class="text-red-500 text-xs italic">Username is required (min 3 chars).</p>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+          <input type="password" formControlName="password" placeholder="Password"
+                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+             class="text-red-500 text-xs italic">Password is required (min 6 chars).</p>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex items-center justify-between mb-4">
+          <button type="submit"  class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Login
+          </button>
+          <button class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <a href="/register">Create an account</a>
+          </button>
+        </div>
+
+        <!-- Google Sign-In -->
+        <div class="flex justify-center mb-4">
+          <button type="button" class="bg-white border rounded-lg py-2 px-4 flex items-center space-x-2 shadow-md hover:bg-gray-100">
+            <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" class="w-5 h-5">
+            <span class="text-gray-700">Sign in with Google</span>
+          </button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </div>
