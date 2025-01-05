@@ -28,8 +28,10 @@
         <td class="p-3 border">{{ species.points }}</td>
         <td class="p-3 border">
           <div class="flex space-x-2">
-            <button (click)="editSpecies(species)"
-                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Edit</button>
+            <button [routerLink]="['/admin/species/edit', species.id]"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              Edit
+            </button>
             <button (click)="deleteSpecies(species.id)"
                     class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Delete</button>
           </div>

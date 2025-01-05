@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminSpecyService } from '../services/admin-specy.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-specie-list',
   templateUrl: './specie-list.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   styleUrls: ['./specie-list.component.css']
 })
 export class SpecieListComponent implements OnInit {

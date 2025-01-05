@@ -44,6 +44,7 @@ export const routes: Routes = [
       { path: 'users/create', component: UserCreateComponent },
       { path: 'species/list', component: SpecieListComponent },
       { path: 'species/create', component: SpecieCreateComponent },
+      { path: 'species/edit/:id', component: SpecieCreateComponent },
       { path: 'hunts/list', component:  HuntListComponent},
       { path: 'competitions/create', component: CompetitionsCreateComponent },
       { path: 'competitions/list', component: CompetitionsListComponent },

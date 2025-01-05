@@ -32,7 +32,6 @@ export class AdminSpecyService {
   // Create species
   createSpecies(species: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, species,{
-
       headers: {
         'Content-Type': 'application/json'
       },
@@ -41,12 +40,30 @@ export class AdminSpecyService {
   }
 
   // Update species
-  updateSpecies(id: string, species: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update/${id}`, species);
+  updateSpecie(id: string, species: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update/${id}`, species, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 
   // Delete species
   deleteSpecies(id: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete/${id}`);
+  }
+
+  // Get species by ID
+  getSpecieById(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).pipe(
+      catchError(error => {
+        console.error('Error fetching species by ID:', error);
+        throw error;
+      })
+    );
   }
 }
