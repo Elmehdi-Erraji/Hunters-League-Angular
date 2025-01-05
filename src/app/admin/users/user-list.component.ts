@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit {
         console.log('API response received:', response);
 
         // Precompute colors and assign to each user
-        this.paginatedUsersWithColors = response.map((user: any) => ({
+        this.paginatedUsersWithColors = response.users.map((user: any) => ({
           ...user,
           color: this.getRandomColor() // Assign a random color once
         }));

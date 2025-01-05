@@ -13,10 +13,10 @@
       <!-- Dashboard -->
       <li class="relative py-2 px-3 rounded-lg transition-all duration-200 group">
         <a routerLink="dashboard" class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 rounded-lg transition-all duration-200 hover:bg-[#a6e3a6] p-2">
-        <span class="flex items-center">
-          <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">dashboard</span>
-          Dashboard
-        </span>
+      <span class="flex items-center">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">dashboard</span>
+        Dashboard
+      </span>
         </a>
       </li>
 
@@ -26,10 +26,10 @@
           class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
           (click)="toggleSidebarDropdown('members')"
         >
-    <span class="flex items-center w-full">
-      <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">group</span>
-      Users
-    </span>
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">group</span>
+        Users
+      </span>
           <span
             class="material-icons transition-transform duration-200"
             [class.rotate-180]="dropdowns['members']"
@@ -59,17 +59,16 @@
         </ul>
       </li>
 
-
       <!-- SPECIES -->
       <li class="relative">
         <div
           class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
           (click)="toggleSidebarDropdown('species')"
         >
-    <span class="flex items-center w-full">
-      <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">pets</span>
-      Species
-    </span>
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">pets</span>
+        Species
+      </span>
           <span
             class="material-icons transition-transform duration-200"
             [class.rotate-180]="dropdowns['species']"
@@ -105,10 +104,10 @@
           class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
           (click)="toggleSidebarDropdown('competitions')"
         >
-    <span class="flex items-center w-full">
-      <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">event</span>
-      Competitions
-    </span>
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">event</span>
+        Competitions
+      </span>
           <span
             class="material-icons transition-transform duration-200"
             [class.rotate-180]="dropdowns['competitions']"
@@ -138,16 +137,94 @@
         </ul>
       </li>
 
+      <!-- PARTICIPATIONS -->
+      <li class="relative">
+        <div
+          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
+          (click)="toggleSidebarDropdown('participations')"
+        >
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">how_to_reg</span>
+        Participations
+      </span>
+          <span
+            class="material-icons transition-transform duration-200"
+            [class.rotate-180]="dropdowns['participations']"
+          >expand_more</span>
+        </div>
+        <ul
+          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
+          [class.max-h-0]="!dropdowns['participations']"
+          [class.opacity-0]="!dropdowns['participations']"
+          [class.max-h-48]="dropdowns['participations']"
+          [class.opacity-100]="dropdowns['participations']"
+        >
+          <li>
+            <a routerLink="participations/create"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              Create
+            </a>
+          </li>
+          <li>
+            <a routerLink="participations/list"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              List
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- HUNTS -->
+      <li class="relative">
+        <div
+          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
+          (click)="toggleSidebarDropdown('hunts')"
+        >
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">track_changes</span>
+        Hunts
+      </span>
+          <span
+            class="material-icons transition-transform duration-200"
+            [class.rotate-180]="dropdowns['hunts']"
+          >expand_more</span>
+        </div>
+        <ul
+          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
+          [class.max-h-0]="!dropdowns['hunts']"
+          [class.opacity-0]="!dropdowns['hunts']"
+          [class.max-h-48]="dropdowns['hunts']"
+          [class.opacity-100]="dropdowns['hunts']"
+        >
+          <li>
+            <a routerLink="hunts/create"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              Create
+            </a>
+          </li>
+          <li>
+            <a routerLink="hunts/list"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              List
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <!-- RESULTS -->
       <li class="relative">
         <div
           class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
           (click)="toggleSidebarDropdown('results')"
         >
-    <span class="flex items-center w-full">
-      <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">bar_chart</span>
-      Results
-    </span>
+      <span class="flex items-center w-full">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">bar_chart</span>
+        Results
+      </span>
           <span
             class="material-icons transition-transform duration-200"
             [class.rotate-180]="dropdowns['results']"
@@ -177,58 +254,164 @@
         </ul>
       </li>
 
-
-    </ul>
-
-  </div>
+      <!-- PODIUM -->
+      <li class="relative py-2 px-3 rounded-lg transition-all duration-200 group">
+        <a routerLink="podium" class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 rounded-lg transition-all duration-200 hover:bg-[#a6e3a6] p-2">
+      <span class="flex items-center">
+        <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">emoji_events</span>
+        Podium
+      </span>
+        </a>
+      </li>
+    </ul>  </div>
 
   <!-- Main Content -->
   <div class="flex-1 flex flex-col overflow-y-auto transition-all duration-300">
     <!-- Header -->
-    <div
-      class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-10"
-    >
-      <!-- Toggle Button -->
-      <button
-        class="md:hidden text-gray-600 focus:outline-none"
-        (click)="toggleSidebar()"
-      >
-        <span class="material-icons">menu</span>
-      </button>
-      <h2 class="text-xl font-bold">Dashboard Overview</h2>
-
-      <!-- Profile Dropdown -->
-      <div class="relative">
-        <div class="relative">
-          <img
-            [src]="'/images/a.png'"
-            alt="Profile"
-            width="40"
-            height="40"
-            class="w-10 h-10 rounded-full cursor-pointer object-cover"
-            (click)="toggleDropdown()"
-          />
-        </div>
-        <div
-          *ngIf="isDropdownOpen"
-          class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20 border border-gray-200"
+    <div class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-10">
+      <!-- Left Section: Toggle Button and Search Bar -->
+      <div class="flex items-center space-x-4">
+        <!-- Toggle Button -->
+        <button
+          class="toggle-button md:hidden text-gray-600 focus:outline-none"
+          (click)="toggleSidebar()"
         >
-          <a href="/profile" class="flex items-center px-4 py-2 hover:bg-gray-100">
-            <span class="material-icons mr-2 text-[#47a146]">person</span> Profile
-          </a>
-          <a href="/settings" class="flex items-center px-4 py-2 hover:bg-gray-100">
-            <span class="material-icons mr-2 text-[#47a146]">settings</span> Settings
-          </a>
-          <a  class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-500">
-            <button (click)="logout()"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-              Logout
-            </button>
-          </a>
+          <span class="material-icons">menu</span>
+        </button>
+
+        <!-- Search Bar -->
+        <div class="relative">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="w-64 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#47a146] focus:border-transparent transition-all duration-200"
+          />
+          <span class="material-icons absolute right-3 top-2 text-gray-400">search</span>
+        </div>
+      </div>
+
+      <!-- Right Section: Icons and Profile Dropdown -->
+      <div class="flex items-center space-x-6">
+        <!-- Messages Icon with Dropdown -->
+        <div class="relative">
+  <span
+    class="material-icons text-gray-600 cursor-pointer hover:text-[#47a146] transition-all duration-200"
+    (click)="toggleMessagesDropdown()"
+  >
+    mail
+  </span>
+          <!-- Notification Badge -->
+          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">3</span>
+          <!-- Messages Dropdown -->
+          <div
+            *ngIf="isMessagesDropdownOpen"
+            class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-20 border border-gray-200"
+          >
+            <div class="px-4 py-2 text-sm text-gray-700 font-semibold">Messages</div>
+            <!-- Dummy Messages -->
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">mail</span>
+              <div>
+                <p class="text-sm font-medium">New Hunt Invitation</p>
+                <p class="text-xs text-gray-500">You've been invited to a hunt.</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">mail</span>
+              <div>
+                <p class="text-sm font-medium">Competition Reminder</p>
+                <p class="text-xs text-gray-500">Your competition starts tomorrow.</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">mail</span>
+              <div>
+                <p class="text-sm font-medium">New Message</p>
+                <p class="text-xs text-gray-500">John Doe sent you a message.</p>
+              </div>
+            </a>
+            <div class="border-t border-gray-200 mt-2 pt-2">
+              <a href="#" class="block px-4 py-2 text-sm text-[#47a146] hover:bg-gray-100">View All Messages</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notifications Icon with Dropdown -->
+        <div class="relative">
+  <span
+    class="material-icons text-gray-600 cursor-pointer hover:text-[#47a146] transition-all duration-200"
+    (click)="toggleNotificationsDropdown()"
+  >
+    notifications
+  </span>
+          <!-- Notification Badge -->
+          <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">5</span>
+          <!-- Notifications Dropdown -->
+          <div
+            *ngIf="isNotificationsDropdownOpen"
+            class="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 z-20 border border-gray-200"
+          >
+            <div class="px-4 py-2 text-sm text-gray-700 font-semibold">Notifications</div>
+            <!-- Dummy Notifications -->
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">notifications</span>
+              <div>
+                <p class="text-sm font-medium">New Hunt Started</p>
+                <p class="text-xs text-gray-500">A new hunt is now live.</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">notifications</span>
+              <div>
+                <p class="text-sm font-medium">Competition Update</p>
+                <p class="text-xs text-gray-500">Your competition has been updated.</p>
+              </div>
+            </a>
+            <a href="#" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">notifications</span>
+              <div>
+                <p class="text-sm font-medium">New Participant</p>
+                <p class="text-xs text-gray-500">Jane Smith joined your hunt.</p>
+              </div>
+            </a>
+            <div class="border-t border-gray-200 mt-2 pt-2">
+              <a href="#" class="block px-4 py-2 text-sm text-[#47a146] hover:bg-gray-100">View All Notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div class="relative">
+          <div class="relative">
+            <img
+              [src]="'/images/a.png'"
+              alt="Profile"
+              width="40"
+              height="40"
+              class="w-10 h-10 rounded-full cursor-pointer object-cover"
+              (click)="toggleDropdown()"
+            />
+          </div>
+          <div
+            *ngIf="isDropdownOpen"
+            class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-20 border border-gray-200"
+          >
+            <a href="/profile" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">person</span> Profile
+            </a>
+            <a href="/settings" class="flex items-center px-4 py-2 hover:bg-gray-100">
+              <span class="material-icons mr-2 text-[#47a146]">settings</span> Settings
+            </a>
+            <a class="flex items-center px-4 py-2 hover:bg-gray-100 text-red-500">
+              <button (click)="logout()"
+                      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Logout
+              </button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-
     <!-- Dynamic Content -->
     <div class="p-6 bg-gray-50 flex-1 rounded-lg shadow-lg m-6 space-y-6">
       <router-outlet></router-outlet>
