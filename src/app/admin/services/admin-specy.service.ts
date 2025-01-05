@@ -16,11 +16,8 @@ export class AdminSpecyService {
       .set('page', page.toString())
       .set('size', size.toString());
 
-    console.log('Making request with params:', params.toString());
-
     return this.http.get<any>(`${this.apiUrl}/findAll`, {
       params,
-      // Adding these headers explicitly for debugging
       headers: {
         'Content-Type': 'application/json'
       }

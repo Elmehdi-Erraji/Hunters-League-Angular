@@ -10,7 +10,6 @@ import { AdminSpecyService } from '../services/admin-specy.service';
   styleUrls: ['./specie-list.component.css']
 })
 export class SpecieListComponent implements OnInit {
-  // Data Variables
   paginatedSpeciesWithColors: any[] = []; // Species with precomputed colors
 
   // Pagination Variables
