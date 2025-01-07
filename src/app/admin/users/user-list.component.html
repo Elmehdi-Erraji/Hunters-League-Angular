@@ -1,0 +1,78 @@
+<div class="p-6 bg-white shadow-lg rounded-lg">
+  <h3 class="text-xl font-bold mb-4">Users List</h3>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-gray-100">
+        <th class="p-3 border">Avatar</th>
+        <th class="p-3 border">ID</th>
+        <th class="p-3 border">Name</th>
+        <th class="p-3 border">Email</th>
+        <th class="p-3 border">Role</th>
+        <th class="p-3 border">CIN</th>
+        <th class="p-3 border">Nationality</th>
+        <th class="p-3 border">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of paginatedUsersWithColors" class="hover:bg-gray-50">
+        <!-- Avatar with first letter and random color -->
+        <td class="p-3 border">
+          <div [ngStyle]="{'background-color': user.color}"
+               class="w-8 h-8 flex items-center justify-center rounded-full text-white font-bold">
+            {{ user.firstName.charAt(0).toUpperCase() }}
+          </div>
+        </td>
+        <td class="p-3 border">#</td>
+        <td class="p-3 border">{{ user.firstName }} {{ user.lastName }}</td>
+        <td class="p-3 border">{{ user.email }}</td>
+        <td class="p-3 border">{{ user.role }}</td>
+        <td class="p-3 border">{{ user.cin }}</td>
+        <td class="p-3 border">{{ user.nationality }}</td>
+        <!-- Action buttons -->
+        <td class="p-3 border">
+          <div class="flex space-x-2">
+            <button (click)="editUser(user)"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Edit</button>
+            <button (click)="deleteUser(user.id)"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Delete</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+
+  <!-- Pagination Controls -->
+  <div class="flex justify-between items-center mt-4">
+    <!-- Prev Button -->
+    <button
+      (click)="prevPage()"
+      [disabled]="currentPage === 0"
+      class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+    >
+      Prev
+    </button>
+
+    <!-- Page Info -->
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+
+    <!-- Next Button -->
+    <button
+      (click)="nextPage()"
+      class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+    >
+      Next
+    </button>
+  </div>
+
+  <!-- Page Numbers -->
+  <div class="flex justify-center mt-4 space-x-2">
+    <button class="bg-gray-700 text-white px-3 py-2 rounded-lg hover:bg-gray-800"></button>
+  </div>
+
+</div>
