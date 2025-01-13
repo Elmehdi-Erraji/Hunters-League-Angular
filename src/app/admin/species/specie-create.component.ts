@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminSpecyService } from '../services/admin-specy.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 
 @Component({
   selector: 'app-specie-create',
   templateUrl: './specie-create.component.html',
   standalone: true,
   imports: [ReactiveFormsModule, NgIf],
-  styleUrls: ['./specie-create.component.css']
+  styleUrls: ['./specie-create.component.css'],
 })
 export class SpecieCreateComponent implements OnInit {
   @Input() specieId?: string; // Input for edit mode
@@ -22,8 +22,8 @@ export class SpecieCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private specieService: AdminSpecyService,
-    private router: Router, // Inject Router
-    private route: ActivatedRoute // Inject ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // Initialize the form
     this.specieForm = this.fb.group({
@@ -31,12 +31,12 @@ export class SpecieCreateComponent implements OnInit {
       category: ['', [Validators.required]],
       minimumWeight: [null, [Validators.required, Validators.min(0.01)]],
       difficulty: ['', [Validators.required]],
-      points: [null, [Validators.required, Validators.min(1)]]
+      points: [null, [Validators.required, Validators.min(1)]],
     });
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
         this.specieId = id;
@@ -57,11 +57,10 @@ export class SpecieCreateComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
-      }
+      },
     });
   }
 
-  // Submit Form
   onSubmit(): void {
     if (this.specieForm.invalid) {
       return; // Stop if the form is invalid
@@ -89,7 +88,7 @@ export class SpecieCreateComponent implements OnInit {
         },
         complete: () => {
           this.loading = false;
-        }
+        },
       });
     } else {
       // Create new specie
@@ -98,7 +97,7 @@ export class SpecieCreateComponent implements OnInit {
           console.log('Specie created successfully:', response);
           this.successMessage = 'Specie created successfully!';
           setTimeout(() => {
-            this.router.navigate(['/admin/species/list']); // Redirect to species list after 2 seconds
+            this.router.navigate(['/admin/species/list']);
           }, 2000);
         },
         error: (error) => {
@@ -106,16 +105,26 @@ export class SpecieCreateComponent implements OnInit {
           this.errorMessage = 'Failed to create specie. Please try again.';
         },
         complete: () => {
-          this.loading = false; // Stop loading
-        }
+          this.loading = false;
+        },
       });
     }
   }
 
   // Form field getters for validation
-  get name() { return this.specieForm.get('name'); }
-  get category() { return this.specieForm.get('category'); }
-  get minimumWeight() { return this.specieForm.get('minimumWeight'); }
-  get difficulty() { return this.specieForm.get('difficulty'); }
-  get points() { return this.specieForm.get('points'); }
+  get name() {
+    return this.specieForm.get('name');
+  }
+  get category() {
+    return this.specieForm.get('category');
+  }
+  get minimumWeight() {
+    return this.specieForm.get('minimumWeight');
+  }
+  get difficulty() {
+    return this.specieForm.get('difficulty');
+  }
+  get points() {
+    return this.specieForm.get('points');
+  }
 }

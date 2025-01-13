@@ -12,14 +12,14 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
     RouterLinkActive
   ],
   styleUrls: ['./admin-layout.component.css'],
-  standalone: true // Add this if you're using standalone components
+  standalone: true
 })
 export class AdminLayoutComponent {
-  isSidebarOpen = true; // Sidebar state
-  isMobile = false; // Mobile check
-  isDropdownOpen = false; // Profile dropdown state
-  isMessagesDropdownOpen = false; // Messages dropdown state
-  isNotificationsDropdownOpen = false; // Notifications dropdown state
+  isSidebarOpen = true;
+  isMobile = false;
+  isDropdownOpen = false;
+  isMessagesDropdownOpen = false;
+  isNotificationsDropdownOpen = false;
 
   dropdowns: { [key: string]: boolean } = {
     members: false,
@@ -28,12 +28,14 @@ export class AdminLayoutComponent {
     participations: false,
     hunts: false,
     results: false
-  }; // Sidebar dropdown states
+  };
+
+
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.checkScreenSize(); // Initial check
+    this.checkScreenSize();
   }
 
   @HostListener('document:click', ['$event'])
@@ -59,11 +61,11 @@ export class AdminLayoutComponent {
   }
 
   checkScreenSize() {
-    this.isMobile = window.innerWidth < 768; // Detect if mobile size
+    this.isMobile = window.innerWidth < 768;
     if (!this.isMobile) {
-      this.isSidebarOpen = true; // Always open sidebar on desktop
+      this.isSidebarOpen = true;
     } else {
-      this.isSidebarOpen = false; // Automatically close sidebar on mobile
+      this.isSidebarOpen = false;
     }
   }
 
@@ -75,22 +77,22 @@ export class AdminLayoutComponent {
   // Profile dropdown toggle
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
-    this.isMessagesDropdownOpen = false; // Close messages dropdown
-    this.isNotificationsDropdownOpen = false; // Close notifications dropdown
+    this.isMessagesDropdownOpen = false;
+    this.isNotificationsDropdownOpen = false;
   }
 
   // Messages dropdown toggle
   toggleMessagesDropdown() {
     this.isMessagesDropdownOpen = !this.isMessagesDropdownOpen;
-    this.isNotificationsDropdownOpen = false; // Close notifications dropdown
-    this.isDropdownOpen = false; // Close profile dropdown
+    this.isNotificationsDropdownOpen = false;
+    this.isDropdownOpen = false;
   }
 
   // Notifications dropdown toggle
   toggleNotificationsDropdown() {
     this.isNotificationsDropdownOpen = !this.isNotificationsDropdownOpen;
-    this.isMessagesDropdownOpen = false; // Close messages dropdown
-    this.isDropdownOpen = false; // Close profile dropdown
+    this.isMessagesDropdownOpen = false;
+    this.isDropdownOpen = false;
   }
 
   // Sidebar dropdown toggle
@@ -101,7 +103,6 @@ export class AdminLayoutComponent {
         this.dropdowns[key] = false;
       }
     }
-
     // Toggle the clicked dropdown
     this.dropdowns[section] = !this.dropdowns[section];
   }

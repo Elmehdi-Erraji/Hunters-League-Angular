@@ -13,10 +13,10 @@ import {UserCreateComponent} from './admin/users/user-create.component';
 import {SpecieListComponent} from './admin/species/specie-list.component';
 import {SpecieCreateComponent} from './admin/species/specie-create.component';
 import {HuntListComponent} from './admin/hunts/hunt-list.component';
-import {CompetitionsCreateComponent} from './admin/competitions/competitions-create.component';
 import {CompetitionsListComponent} from './admin/competitions/competitions-list.component';
 import {ParticipationListComponent} from './admin/participations/participation-list.component';
 import {ParticipationCreateComponent} from './admin/participations/participation-create.component';
+import {CompetitionCreateComponent} from './admin/competitions/competition-create.component';
 
 
 export const routes: Routes = [
@@ -46,28 +46,41 @@ export const routes: Routes = [
       { path: 'species/create', component: SpecieCreateComponent },
       { path: 'species/edit/:id', component: SpecieCreateComponent },
       { path: 'hunts/list', component:  HuntListComponent},
-      { path: 'competitions/create', component: CompetitionsCreateComponent },
+      { path: 'competitions/create', component: CompetitionCreateComponent },
       { path: 'competitions/list', component: CompetitionsListComponent },
+      { path: 'competitions/edit/:id', component: CompetitionCreateComponent },
       { path: 'participations/list', component: ParticipationListComponent },
       { path: 'participations/create', component: ParticipationCreateComponent },
     ]
   },
 
-  // // Jury Dashboard
-  // {
-  //   path: 'jury',
-  //   // component: JuryDashboardComponent,
-  //   canActivate: [AuthGuard, RoleGuard],
-  //   data: { roles: ['JURY'] }
-  // },
+  // Jury Dashboard (protected by RoleGuard)
+  {
+    path: 'jury',
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['JURY'] },
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboardComponent },
 
-  // Member Dashboard
+    ]
+  },
+
   {
     path: 'member',
-    component: MemberDashboardComponent,
+    component: AdminLayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['MEMBER'] }
+    data: { roles: ['MEMBER'] },
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: MemberDashboardComponent },
+
+    ]
   },
+
+
+
 
   // Wildcard route for invalid paths
   { path: '**', redirectTo: 'login' }

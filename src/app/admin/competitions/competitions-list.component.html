@@ -1,6 +1,6 @@
 <div class="p-6 bg-white shadow-lg rounded-lg">
   <div class="flex justify-between items-center mb-4">
-    <h3 class="text-xl font-bold">Species List</h3>
+    <h3 class="text-xl font-bold">Competitions List</h3>
 
   </div>
 
@@ -32,10 +32,14 @@
         <td class="p-3 border">{{ competition.openRegistration }}</td>
         <td class="p-3 border">
           <div class="flex space-x-2">
-            <button (click)="editCompetitions(competition)"
-                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Edit</button>
+            <button [routerLink]="['/admin/competitions/edit', competition.id]"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              Edit
+            </button>
             <button (click)="deleteCompetition(competition.id)"
-                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">Delete</button>
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              Delete
+            </button>
           </div>
         </td>
       </tr>
