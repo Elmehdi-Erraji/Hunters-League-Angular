@@ -130,47 +130,8 @@
         </ul>
       </li>
 
-      <!-- PARTICIPATIONS -->
-      <li class="relative" *ngIf="userRole === 'MEMBER'">
-        <div
-          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
-          (click)="toggleSidebarDropdown('participations')"
-        >
-          <span class="flex items-center w-full">
-            <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">how_to_reg</span>
-            Participations
-          </span>
-          <span
-            class="material-icons transition-transform duration-200"
-            [class.rotate-180]="dropdowns['participations']"
-          >expand_more</span>
-        </div>
-        <ul
-          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
-          [class.max-h-0]="!dropdowns['participations']"
-          [class.opacity-0]="!dropdowns['participations']"
-          [class.max-h-48]="dropdowns['participations']"
-          [class.opacity-100]="dropdowns['participations']"
-        >
-          <li>
-            <a routerLink="participations/create"
-               routerLinkActive="bg-[#d6f5d6] text-gray-900"
-               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
-              Create
-            </a>
-          </li>
-          <li>
-            <a routerLink="participations/list"
-               routerLinkActive="bg-[#d6f5d6] text-gray-900"
-               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
-              List
-            </a>
-          </li>
-        </ul>
-      </li>
-
       <!-- HUNTS -->
-      <li class="relative" *ngIf="userRole === 'MEMBER'">
+      <li class="relative" *ngIf="userRole === 'ADMIN'">
         <div
           class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
           (click)="toggleSidebarDropdown('hunts')"
@@ -240,15 +201,126 @@
         </ul>
       </li>
 
-      <!-- PODIUM -->
-      <li class="relative py-2 px-3 rounded-lg transition-all duration-200 group" *ngIf="userRole === 'ADMIN'">
-        <a routerLink="podium" class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 rounded-lg transition-all duration-200 hover:bg-[#a6e3a6] p-2">
-          <span class="flex items-center">
-            <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">emoji_events</span>
-            Podium
+
+
+<!--Member-->
+
+
+
+      <!-- PARTICIPATION'S-->
+      <li class="relative" *ngIf="userRole === 'MEMBER'">
+        <div
+          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
+          (click)="toggleSidebarDropdown('participations')"
+        >
+          <span class="flex items-center w-full">
+            <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">how_to_reg</span>
+            Participations
           </span>
-        </a>
+          <span
+            class="material-icons transition-transform duration-200"
+            [class.rotate-180]="dropdowns['participations']"
+          >expand_more</span>
+        </div>
+        <ul
+          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
+          [class.max-h-0]="!dropdowns['participations']"
+          [class.opacity-0]="!dropdowns['participations']"
+          [class.max-h-48]="dropdowns['participations']"
+          [class.opacity-100]="dropdowns['participations']"
+        >
+
+          <li>
+            <a routerLink="participation/list"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              List
+            </a>
+          </li>
+        </ul>
       </li>
+
+      <!-- HUNTS -->
+      <li class="relative" *ngIf="userRole === 'MEMBER'">
+        <div
+          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
+          (click)="toggleSidebarDropdown('hunts')"
+        >
+          <span class="flex items-center w-full">
+            <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">track_changes</span>
+            Hunts
+          </span>
+          <span
+            class="material-icons transition-transform duration-200"
+            [class.rotate-180]="dropdowns['hunts']"
+          >expand_more</span>
+        </div>
+        <ul
+          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
+          [class.max-h-0]="!dropdowns['hunts']"
+          [class.opacity-0]="!dropdowns['hunts']"
+          [class.max-h-48]="dropdowns['hunts']"
+          [class.opacity-100]="dropdowns['hunts']"
+        >
+
+          <li>
+            <a routerLink="myHunts/list"
+              routerLinkActive="bg-[#d6f5d6] text-gray-900"
+              class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              My Hunts List
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <!-- RESULTS -->
+      <li class="relative" *ngIf="userRole === 'JURY'">
+        <div
+          class="flex items-center justify-between w-full cursor-pointer text-gray-400 hover:text-gray-900 transition-all duration-200 hover:bg-[#a6e3a6] p-2 rounded-lg"
+          (click)="toggleSidebarDropdown('results')"
+        >
+          <span class="flex items-center w-full">
+            <span class="material-icons mr-2 text-[#47a146] group-hover:text-[#357a36]">bar_chart</span>
+            Results
+          </span>
+          <span
+            class="material-icons transition-transform duration-200"
+            [class.rotate-180]="dropdowns['results']"
+          >expand_more</span>
+        </div>
+        <ul
+          class="mt-2 space-y-1 overflow-hidden transition-all duration-200"
+          [class.max-h-0]="!dropdowns['results']"
+          [class.opacity-0]="!dropdowns['results']"
+          [class.max-h-48]="dropdowns['results']"
+          [class.opacity-100]="dropdowns['results']"
+        >
+          <li>
+            <a routerLink="results/list"
+               routerLinkActive="bg-[#d6f5d6] text-gray-900"
+               class="block py-2 px-3 text-gray-400 hover:bg-[#d6f5d6] hover:text-gray-900 rounded-lg">
+              List
+            </a>
+          </li>
+        </ul>
+      </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </ul>
   </div>
 

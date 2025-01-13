@@ -6,7 +6,6 @@ import {MemberDashboardComponent} from './member/member-dashboard/member-dashboa
 import {RoleGuard} from './core/guards/role.guard';
 import {AuthGuard} from './core/guards/auth.guard';
 import {ProfileComponent} from './profile/profile.component';
-import {TestComponent} from './member/test/test.component';
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
 import {UserListComponent} from './admin/users/user-list.component';
 import {UserCreateComponent} from './admin/users/user-create.component';
@@ -17,12 +16,14 @@ import {CompetitionsListComponent} from './admin/competitions/competitions-list.
 import {ParticipationListComponent} from './admin/participations/participation-list.component';
 import {ParticipationCreateComponent} from './admin/participations/participation-create.component';
 import {CompetitionCreateComponent} from './admin/competitions/competition-create.component';
+import {CompititionsComponent} from './member/compititions/compititions.component';
+import {ParticipatinListComponent} from './member/participation/participatin-list.component';
+import {HuntsComponent} from './member/hunts/hunts.component';
 
 
 export const routes: Routes = [
   // Default route
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'test', component: TestComponent },
 
   // Auth routes
   { path: 'login', component: LoginComponent },
@@ -75,6 +76,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: MemberDashboardComponent },
+      { path: 'competitions', component: CompititionsComponent },
+      { path: 'participation/list', component: ParticipatinListComponent },
+      { path: 'myHunts/list', component: HuntsComponent },
 
     ]
   },
