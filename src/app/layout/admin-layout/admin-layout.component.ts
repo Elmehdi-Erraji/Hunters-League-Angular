@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { NgIf, NgOptimizedImage } from '@angular/common';
+import { Component, HostListener, OnInit } from '@angular/core';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {NgIf} from '@angular/common';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -14,12 +15,13 @@ import { NgIf, NgOptimizedImage } from '@angular/common';
   styleUrls: ['./admin-layout.component.css'],
   standalone: true
 })
-export class AdminLayoutComponent {
+export class AdminLayoutComponent implements OnInit {
   isSidebarOpen = true;
   isMobile = false;
   isDropdownOpen = false;
   isMessagesDropdownOpen = false;
   isNotificationsDropdownOpen = false;
+  userRole: string | null = null; // Store the user's role
 
   dropdowns: { [key: string]: boolean } = {
     members: false,
@@ -30,12 +32,11 @@ export class AdminLayoutComponent {
     results: false
   };
 
-
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.checkScreenSize();
+    this.userRole = this.authService.getRole(); // Fetch the user's role
   }
 
   @HostListener('document:click', ['$event'])
