@@ -79,6 +79,7 @@ export const routes: Routes = [
       { path: 'competitions', component: CompititionsComponent },
       { path: 'participation/list', component: ParticipatinListComponent },
       { path: 'myHunts/list', component: HuntsComponent },
+        { path: 'myCompetitions/list', component: CompititionsComponent },
 
     ]
   },

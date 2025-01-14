@@ -1,1 +1,81 @@
-<p>participatin-list works!</p>
+<div class="p-6 bg-white shadow-lg rounded-lg">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-xl font-bold">Participations List</h3>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="flex justify-center items-center">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+  </div>
+
+  <!-- Empty State Message -->
+  <div *ngIf="isEmpty && !loading" class="text-center text-gray-500 py-4">
+    No participations found for this user.
+  </div>
+
+  <!-- Table -->
+  <div *ngIf="!loading && !isEmpty && !errorMessage" class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-gray-100">
+        <th class="p-3 border">ID</th>
+        <th class="p-3 border">Competition Code</th>
+        <th class="p-3 border">Location</th>
+        <th class="p-3 border">Date</th>
+        <th class="p-3 border">Species Type</th>
+        <th class="p-3 border">Score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let participation of participations" class="hover:bg-gray-50">
+        <td class="p-3 border">#</td>
+        <td class="p-3 border">{{ participation.competition.code }}</td>
+        <td class="p-3 border">{{ participation.competition.location }}</td>
+        <td class="p-3 border">{{ participation.competition.date }}</td>
+        <td class="p-3 border">{{ participation.competition.speciesType }}</td>
+        <td class="p-3 border">{{ participation.score }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div *ngIf="!isEmpty && !loading" class="flex justify-between items-center mt-4">
+    <div>
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 0"
+        class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 disabled:bg-gray-400"
+      >
+        Previous
+      </button>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages - 1"
+        class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800 disabled:bg-gray-400 ml-2"
+      >
+        Next
+      </button>
+    </div>
+    <div>
+      <span class="text-gray-700">Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    </div>
+    <div>
+      <select
+        [(ngModel)]="pageSize"
+        (change)="changePageSize(pageSize)"
+        class="border border-gray-300 rounded-lg px-3 py-2"
+      >
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="50">50 per page</option>
+      </select>
+    </div>
+  </div>
+</div>
