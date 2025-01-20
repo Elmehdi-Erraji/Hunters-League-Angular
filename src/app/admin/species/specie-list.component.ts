@@ -1,85 +1,89 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminSpecyService } from '../services/admin-specy.service';
-import {RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {deleteSpecies, loadSpecies} from '../../store/species/species.actions';
+import {
+  selectPageNumber,
+  selectSpeciesList,
+  selectSpeciesLoading,
+  selectTotalElements, selectTotalPages
+} from '../../store/species/species.selectors';
+
+// Import your actions & selectors
+
 
 @Component({
   selector: 'app-specie-list',
   templateUrl: './specie-list.component.html',
+  styleUrls: ['./specie-list.component.css'],
   standalone: true,
   imports: [CommonModule, RouterLink],
-  styleUrls: ['./specie-list.component.css']
 })
 export class SpecieListComponent implements OnInit {
-  paginatedSpeciesWithColors: any[] = []; // Species with precomputed colors
+  // Observables
+  speciesWithColors$!: Observable<any[]>;
+  loading$!: Observable<boolean>;
+  totalElements$!: Observable<number>;
 
-  // Pagination Variables
-  totalPages = 0;               // Total pages
-  currentPage = 0;              // Current active page
-  pageSize = 10;                 // Number of items per page (default to 2 as per your API response)
-  totalElements = 0;            // Total number of elements
+  // We'll keep pageNumber & totalPages in local variables for easy next/prev usage
+  pageNumber = 0;
+  totalPages = 0;
+  pageSize = 10; // same as before
 
-  // Loading State
-  loading = false;              // Show/hide loading indicator
-
-  constructor(private specieService: AdminSpecyService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     console.log('Component initialized, loading first page...');
-    this.getSpecies(this.currentPage, this.pageSize); // Load species on component initialization
-  }
+    // Dispatch an action to load the first page
+    this.store.dispatch(loadSpecies({ page: 0, size: this.pageSize }));
 
-  // Fetch species with pagination
-  getSpecies(page: number, size: number): void {
-    console.log(`Fetching species for page: ${page}, size: ${size}`);
-    this.loading = true; // Show loading spinner
+    // Subscribe to loading & totalElements
+    this.loading$ = this.store.select(selectSpeciesLoading);
+    this.totalElements$ = this.store.select(selectTotalElements);
 
-    this.specieService.findAll(page, size).subscribe({
-      next: (response) => {
-        console.log('API response received:', response);
-
-        // Assign response data
-        this.paginatedSpeciesWithColors = response.species.map((species: any) => ({
-          ...species,
-          color: this.getRandomColor() // Assign a random color once
-        }));
-
-        // Update pagination info directly from response
-        this.currentPage = response.pageNumber;
-        this.totalPages = response.totalPages;
-        this.totalElements = response.totalElements;
-
-        console.log(`Updated currentPage: ${this.currentPage}, totalPages: ${this.totalPages}`);
-      },
-      error: (error) => {
-        console.error('Error fetching species:', error);
-        this.paginatedSpeciesWithColors = [];
-        this.totalPages = 0;
-      },
-      complete: () => {
-        console.log('API request completed.');
-        this.loading = false; // Turn off loading spinner
-      }
+    // Subscribe to pageNumber & totalPages from store, so we can do pagination
+    this.store.select(selectPageNumber).subscribe((page) => {
+      this.pageNumber = page;
     });
+    this.store.select(selectTotalPages).subscribe((pages) => {
+      this.totalPages = pages;
+    });
+
+    // Subscribe to speciesList and assign random colors on the fly
+    this.speciesWithColors$ = this.store.select(selectSpeciesList).pipe(
+      map(speciesArray =>
+        speciesArray.map(species => ({
+          ...species,
+          color: this.getRandomColor()
+        }))
+      )
+    );
   }
 
   // Next Page
   nextPage(): void {
-    if (this.currentPage < this.totalPages - 1) {
-      this.getSpecies(this.currentPage + 1, this.pageSize);
+    if (this.pageNumber < this.totalPages - 1) {
+      this.store.dispatch(
+        loadSpecies({ page: this.pageNumber + 1, size: this.pageSize })
+      );
     }
   }
 
   // Previous Page
   prevPage(): void {
-    if (this.currentPage > 0) {
-      this.getSpecies(this.currentPage - 1, this.pageSize);
+    if (this.pageNumber > 0) {
+      this.store.dispatch(
+        loadSpecies({ page: this.pageNumber - 1, size: this.pageSize })
+      );
     }
   }
 
   // Go to specific page
   goToPage(page: number): void {
-    this.getSpecies(page, this.pageSize);
+    this.store.dispatch(loadSpecies({ page, size: this.pageSize }));
   }
 
   // Generate an array for page numbers
@@ -89,17 +93,19 @@ export class SpecieListComponent implements OnInit {
 
   // Generate random color for avatars
   getRandomColor(): string {
-    const colors = ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB']; // Gray shades
+    const colors = ['#4B5563', '#6B7280', '#9CA3AF', '#D1D5DB', '#E5E7EB'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
+  // Edit species
   editSpecies(species: any): void {
     console.log('Edit species:', species);
-    // Implement edit logic here
+    // Could dispatch an update action or navigate to an edit page
   }
 
+  // Delete species
   deleteSpecies(speciesId: string): void {
     console.log('Delete species with ID:', speciesId);
-    // Implement delete logic here
+    this.store.dispatch(deleteSpecies({ id: speciesId }));
   }
 }

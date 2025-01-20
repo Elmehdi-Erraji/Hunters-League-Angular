@@ -1,0 +1,119 @@
+<div class="p-4 sm:p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">
+    {{ competitionId ? 'Update Competition' : 'Create New Competition' }}
+  </h2>
+
+  <!-- Success and Error Messages -->
+  <div *ngIf="successMessage" class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="mb-4 p-4 bg-red-100 text-red-800 rounded-lg">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Competition Form -->
+  <form [formGroup]="competitionForm" (ngSubmit)="onSubmit()">
+    <!-- Code Field -->
+    <div class="mb-4">
+      <label for="code" class="block text-gray-700 font-medium mb-2">Code</label>
+      <input id="code" type="text" formControlName="code"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
+             placeholder="Enter competition code">
+      <span *ngIf="competitionForm.get('code')?.invalid && competitionForm.get('code')?.touched"
+            class="text-red-500 text-sm">
+        Code is required.
+      </span>
+    </div>
+
+    <!-- Location Field -->
+    <div class="mb-4">
+      <label for="location" class="block text-gray-700 font-medium mb-2">Location</label>
+      <input id="location" type="text" formControlName="location"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
+             placeholder="Enter competition location">
+      <span *ngIf="competitionForm.get('location')?.invalid && competitionForm.get('location')?.touched"
+            class="text-red-500 text-sm">
+        Location is required.
+      </span>
+    </div>
+
+    <!-- Date Field -->
+    <div class="mb-4">
+      <label for="date" class="block text-gray-700 font-medium mb-2">Date</label>
+      <input id="date" type="datetime-local" formControlName="date"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none">
+      <span *ngIf="competitionForm.get('date')?.invalid && competitionForm.get('date')?.touched"
+            class="text-red-500 text-sm">
+        Date is required.
+      </span>
+    </div>
+
+    <!-- Species Type Field -->
+    <div class="mb-4">
+      <label for="speciesType" class="block text-gray-700 font-medium mb-2">Species Type</label>
+      <div class="relative">
+        <select id="speciesType" formControlName="speciesType"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none appearance-none bg-white">
+          <option value="SEA">SEA</option>
+          <option value="BIRD">BIRD</option>
+          <option value="BIG_GAME">BIG_GAME</option>
+        </select>
+        <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <span class="material-icons text-gray-500">expand_more</span>
+        </span>
+      </div>
+      <span *ngIf="competitionForm.get('speciesType')?.invalid && competitionForm.get('speciesType')?.touched"
+            class="text-red-500 text-sm">
+        Species type is required.
+      </span>
+    </div>
+
+    <!-- Minimum Participants Field -->
+    <div class="mb-4">
+      <label for="minParticipants" class="block text-gray-700 font-medium mb-2">Minimum Participants</label>
+      <input id="minParticipants" type="number" formControlName="minParticipants"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
+             placeholder="Enter minimum participants">
+      <span *ngIf="competitionForm.get('minParticipants')?.invalid && competitionForm.get('minParticipants')?.touched"
+            class="text-red-500 text-sm">
+        Minimum participants are required.
+      </span>
+    </div>
+
+    <!-- Maximum Participants Field -->
+    <div class="mb-4">
+      <label for="maxParticipants" class="block text-gray-700 font-medium mb-2">Maximum Participants</label>
+      <input id="maxParticipants" type="number" formControlName="maxParticipants"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
+             placeholder="Enter maximum participants">
+      <span *ngIf="competitionForm.get('maxParticipants')?.invalid && competitionForm.get('maxParticipants')?.touched"
+            class="text-red-500 text-sm">
+        Maximum participants are required.
+      </span>
+    </div>
+
+    <!-- Open Registration Field -->
+    <div class="mb-4">
+      <label for="openRegistration" class="block text-gray-700 font-medium mb-2">Open Registration</label>
+      <div class="relative">
+        <select id="openRegistration" formControlName="openRegistration"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none appearance-none bg-white">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <span class="material-icons text-gray-500">expand_more</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <button type="submit"
+              [disabled]="loading"
+              class="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all duration-200">
+        {{ loading ? (competitionId ? 'Updating...' : 'Creating...') : (competitionId ? 'Update Competition' : 'Create Competition') }}
+      </button>
+    </div>
+  </form>
+</div>

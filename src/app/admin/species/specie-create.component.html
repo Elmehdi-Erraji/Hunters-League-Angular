@@ -1,5 +1,7 @@
 <div class="p-4 sm:p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
-  <h2 class="text-2xl font-bold text-gray-800 mb-6">Create New Specie</h2>
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">
+    {{ specieId ? 'Update Specie' : 'Create New Specie' }}
+  </h2>
 
   <!-- Success and Error Messages -->
   <div *ngIf="successMessage" class="mb-4 p-4 bg-green-100 text-green-800 rounded-lg">
@@ -37,7 +39,10 @@
           <span class="material-icons text-gray-500">expand_more</span>
         </span>
       </div>
-      <span *ngIf="specieForm.get('category')?.invalid && specieForm.get('category')?.touched" class="text-red-500 text-sm">Category is required.</span>
+      <span *ngIf="specieForm.get('category')?.invalid && specieForm.get('category')?.touched"
+            class="text-red-500 text-sm">
+        Category is required.
+      </span>
     </div>
 
     <!-- Minimum Weight Field -->
@@ -46,7 +51,10 @@
       <input id="minimumWeight" type="number" formControlName="minimumWeight"
              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
              placeholder="Enter minimum weight">
-      <span *ngIf="specieForm.get('minimumWeight')?.invalid && specieForm.get('minimumWeight')?.touched" class="text-red-500 text-sm">Valid weight is required.</span>
+      <span *ngIf="specieForm.get('minimumWeight')?.invalid && specieForm.get('minimumWeight')?.touched"
+            class="text-red-500 text-sm">
+        Valid weight is required.
+      </span>
     </div>
 
     <!-- Difficulty Field -->
@@ -65,7 +73,10 @@
           <span class="material-icons text-gray-500">expand_more</span>
         </span>
       </div>
-      <span *ngIf="specieForm.get('difficulty')?.invalid && specieForm.get('difficulty')?.touched" class="text-red-500 text-sm">Difficulty is required.</span>
+      <span *ngIf="specieForm.get('difficulty')?.invalid && specieForm.get('difficulty')?.touched"
+            class="text-red-500 text-sm">
+        Difficulty is required.
+      </span>
     </div>
 
     <!-- Points Field -->
@@ -74,7 +85,10 @@
       <input id="points" type="number" formControlName="points"
              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-300 focus:outline-none"
              placeholder="Enter points">
-      <span *ngIf="specieForm.get('points')?.invalid && specieForm.get('points')?.touched" class="text-red-500 text-sm">Valid points are required.</span>
+      <span *ngIf="specieForm.get('points')?.invalid && specieForm.get('points')?.touched"
+            class="text-red-500 text-sm">
+        Valid points are required.
+      </span>
     </div>
 
     <!-- Submit Button -->
@@ -82,7 +96,7 @@
       <button type="submit"
               [disabled]="loading"
               class="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 transition-all duration-200">
-        {{ loading ? 'Creating...' : 'Create Specie' }}
+        {{ loading ? (specieId ? 'Updating...' : 'Creating...') : (specieId ? 'Update Specie' : 'Create Specie') }}
       </button>
     </div>
   </form>

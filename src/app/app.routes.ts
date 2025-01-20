@@ -6,23 +6,24 @@ import {MemberDashboardComponent} from './member/member-dashboard/member-dashboa
 import {RoleGuard} from './core/guards/role.guard';
 import {AuthGuard} from './core/guards/auth.guard';
 import {ProfileComponent} from './profile/profile.component';
-import {TestComponent} from './member/test/test.component';
 import {AdminLayoutComponent} from './layout/admin-layout/admin-layout.component';
 import {UserListComponent} from './admin/users/user-list.component';
 import {UserCreateComponent} from './admin/users/user-create.component';
 import {SpecieListComponent} from './admin/species/specie-list.component';
 import {SpecieCreateComponent} from './admin/species/specie-create.component';
 import {HuntListComponent} from './admin/hunts/hunt-list.component';
-import {CompetitionsCreateComponent} from './admin/competitions/competitions-create.component';
 import {CompetitionsListComponent} from './admin/competitions/competitions-list.component';
 import {ParticipationListComponent} from './admin/participations/participation-list.component';
 import {ParticipationCreateComponent} from './admin/participations/participation-create.component';
+import {CompetitionCreateComponent} from './admin/competitions/competition-create.component';
+import {CompititionsComponent} from './member/compititions/compititions.component';
+import {ParticipatinListComponent} from './member/participation/participatin-list.component';
+import {HuntsComponent} from './member/hunts/hunts.component';
 
 
 export const routes: Routes = [
   // Default route
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'test', component: TestComponent },
 
   // Auth routes
   { path: 'login', component: LoginComponent },
@@ -46,28 +47,45 @@ export const routes: Routes = [
       { path: 'species/create', component: SpecieCreateComponent },
       { path: 'species/edit/:id', component: SpecieCreateComponent },
       { path: 'hunts/list', component:  HuntListComponent},
-      { path: 'competitions/create', component: CompetitionsCreateComponent },
+      { path: 'competitions/create', component: CompetitionCreateComponent },
       { path: 'competitions/list', component: CompetitionsListComponent },
+      { path: 'competitions/edit/:id', component: CompetitionCreateComponent },
       { path: 'participations/list', component: ParticipationListComponent },
       { path: 'participations/create', component: ParticipationCreateComponent },
     ]
   },
 
-  // // Jury Dashboard
-  // {
-  //   path: 'jury',
-  //   // component: JuryDashboardComponent,
-  //   canActivate: [AuthGuard, RoleGuard],
-  //   data: { roles: ['JURY'] }
-  // },
+  // Jury Dashboard (protected by RoleGuard)
+  {
+    path: 'jury',
+    component: AdminLayoutComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { roles: ['JURY'] },
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboardComponent },
 
-  // Member Dashboard
+    ]
+  },
+
   {
     path: 'member',
-    component: MemberDashboardComponent,
+    component: AdminLayoutComponent,
     canActivate: [AuthGuard, RoleGuard],
-    data: { roles: ['MEMBER'] }
+    data: { roles: ['MEMBER'] },
+    children: [
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: MemberDashboardComponent },
+      { path: 'competitions', component: CompititionsComponent },
+      { path: 'participation/list', component: ParticipatinListComponent },
+      { path: 'myHunts/list', component: HuntsComponent },
+        { path: 'myCompetitions/list', component: CompititionsComponent },
+
+    ]
   },
+
+
+
 
   // Wildcard route for invalid paths
   { path: '**', redirectTo: 'login' }

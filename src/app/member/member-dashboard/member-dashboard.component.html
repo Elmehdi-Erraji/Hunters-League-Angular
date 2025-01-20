@@ -1,1 +1,123 @@
-<p>member-dashboard works!</p>
+<div class="bg-gradient-to-r from-blue-50 to-purple-50 min-h-screen p-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Grid Container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Competition Card -->
+      <div
+        *ngFor="let competition of competitions"
+        class="relative flex flex-col bg-white shadow-sm border border-slate-200 rounded-lg"
+      >
+
+
+        <!-- Card Content -->
+        <div class="p-4 flex flex-col flex-grow">
+          <!-- Hunt Title and Rating -->
+          <div class="flex items-center mb-2">
+            <h6 class="text-slate-800 text-xl font-semibold">
+              {{ competition.code }}
+            </h6>
+
+            <div class="flex items-center gap-0.5 ml-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-600">
+                <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-slate-600 ml-1.5">5.0</span>
+            </div>
+          </div>
+
+          <!-- Hunt Description -->
+          <p class="text-slate-600 leading-normal font-light flex-grow">
+            Join the annual {{ competition.speciesType.toLowerCase() }} hunting competition in {{ competition.location }}. Test your skills and compete for the grand prize!
+          </p>
+
+          <!-- Hunt Details -->
+          <div class="mt-4 space-y-2">
+            <!-- Location -->
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 mr-2">
+                <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-600">{{ competition.location }}</span>
+            </div>
+
+            <!-- Date -->
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 mr-2">
+                <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-600">{{ competition.date | date: 'longDate' }}</span>
+            </div>
+
+            <!-- Species Type -->
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 mr-2">
+                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9 7.5A.75.75 0 019 9v.75a.75.75 0 01-1.5 0V9A.75.75 0 019 7.5zm6 0a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V9A.75.75 0 0115 7.5zm-3 6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-600">{{ competition.speciesType }}</span>
+            </div>
+
+            <!-- Participants -->
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 mr-2">
+                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-600">{{ competition.minParticipants }} - {{ competition.maxParticipants }} Participants</span>
+            </div>
+
+            <!-- Registration Status -->
+            <div class="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 mr-2">
+                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM9 7.5A.75.75 0 019 9v.75a.75.75 0 01-1.5 0V9A.75.75 0 019 7.5zm6 0a.75.75 0 01.75.75v.75a.75.75 0 01-1.5 0V9A.75.75 0 0115 7.5zm-3 6a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-slate-600">Registration: <span class="font-semibold">{{ competition.openRegistration ? 'Open' : 'Closed' }}</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="group my-3 inline-flex flex-wrap justify-center items-center gap-2">
+          <!-- View Details Button -->
+          <button class="rounded-full border border-slate-300 p-2.5 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+              <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <!-- Register Button -->
+          <button class="rounded-full border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" [disabled]="!competition.openRegistration">
+            Register
+          </button>
+        </div>
+
+        <!-- Reserve Button -->
+        <div class="px-4 pb-4 pt-0 mt-2">
+          <button class="w-full rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button" [disabled]="!competition.openRegistration">
+            Reserve
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex justify-center mt-8">
+      <button
+        (click)="previousPage()"
+        [disabled]="currentPage === 0"
+        class="px-4 py-2 bg-slate-800 text-white rounded-lg mx-2 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Previous
+      </button>
+      <span class="text-slate-600 mx-4 self-center">
+        Page {{ currentPage + 1 }} of {{ totalPages }}
+      </span>
+      <button
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages - 1"
+        class="px-4 py-2 bg-slate-800 text-white rounded-lg mx-2 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

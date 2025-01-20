@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth'; // Replace with your API URL
+  private userIdKey = 'user_id';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -31,6 +32,7 @@ export class AuthService {
     localStorage.setItem('access_token', response.accessToken);
     localStorage.setItem('refresh_token', response.refreshToken);
     localStorage.setItem('role', response.role);
+    localStorage.setItem('user_id', response.id);
   }
 
   // Get access token
@@ -41,6 +43,14 @@ export class AuthService {
   // Get role
   getRole(): string | null {
     return localStorage.getItem('role');
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem(this.userIdKey);
+  }
+
+  setUserId(userId: string): void {
+    localStorage.setItem(this.userIdKey, userId);
   }
 
   // Check if user is logged in
