@@ -33,27 +33,24 @@
     </p>
   </div>
 
-  <!-- Card 4: Participants -->
-  <div
-    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:bg-gray-50 transition duration-300 transform hover:scale-105"
+  <!-- Card 4: Species List (New Card) -->
+  <a
+    routerLink="/admin/species/list"
+    class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center hover:bg-gray-50 transition duration-300 transform hover:scale-105 cursor-pointer"
   >
-    <span class="material-icons text-gray-600 text-5xl mb-4">how_to_reg</span>
-    <h3 class="text-xl font-semibold text-gray-800 mb-2">Participants</h3>
+    <span class="material-icons text-gray-600 text-5xl mb-4">pets</span>
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">Species</h3>
     <p class="text-3xl font-bold text-gray-900">
-      {{ isLoading ? '2,000,003' : (statistics.participation | number) }}
+      {{ isLoading ? '500' : (statistics.species | number) }}
     </p>
-  </div>
+  </a>
 </div>
-
 
 <!-- Additional Statistics -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-  <!-- Card 4: Participants -->
-
-
-  <!-- Card 5: Active Users -->
-
+  <!-- Additional cards here -->
 </div>
+
 <!-- Podium for Top 3 Hunters -->
 <div class="mt-12">
   <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Top 3 Hunters</h2>
@@ -83,4 +80,3 @@
     </div>
   </div>
 </div>
-
