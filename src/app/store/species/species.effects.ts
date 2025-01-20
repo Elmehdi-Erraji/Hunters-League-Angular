@@ -23,7 +23,7 @@ export class SpeciesEffects {
         this.adminSpecyService.findAll(action.page, action.size).pipe(
           map((response) =>
             loadSpeciesSuccess({
-              speciesList: response.content,
+              speciesList: response.species,
               pageNumber: response.pageNumber,
               totalPages: response.totalPages,
               totalElements: response.totalElements,
