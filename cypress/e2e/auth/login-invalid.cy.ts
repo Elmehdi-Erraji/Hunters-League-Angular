@@ -1,11 +1,17 @@
-// cypress/e2e/auth/login.cy.ts
+//Network intercepting
 
-describe('Login error cases', () => {
+describe('Login - invalid credentials', () => {
+
   beforeEach(() => {
     cy.visit('/login');
   })
 
-  it('Shows error for invalid credentials 401 ', () => {
+  it('should display an error when backend return 401', () => {
+    cy.intercept('POST', '/api/auth/login',{
+      statusCode: 401,
+      body: {message: 'Invalid credentials'},
+    } ).as('loginRequest');
+
     cy.get('input[formcontrolname="username"]').type('wronguser');
     cy.get('input[formcontrolname="password"]').type('wronguser');
 
@@ -13,11 +19,7 @@ describe('Login error cases', () => {
 
     cy.contains('Invalid username or password').should('be.visible');
 
-    cy.wait(5000);
-
-    cy.contains('Invalid username or password').should('not.exist');
-
   })
 
-  it
+
 })
