@@ -1,0 +1,63 @@
+<div class="p-6 bg-white shadow-lg rounded-lg">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-xl font-bold">Competitions List</h3>
+
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-gray-100">
+        <th class="p-3 border">ID</th>
+        <th class="p-3 border">code</th>
+        <th class="p-3 border">location</th>
+        <th class="p-3 border">date</th>
+        <th class="p-3 border">speciesType</th>
+        <th class="p-3 border">minParticipants</th>
+        <th class="p-3 border">maxParticipants</th>
+        <th class="p-3 border">openRegistration</th>
+        <th class="p-3 border">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let competition of paginatedCompetitionsWithColors" class="hover:bg-gray-50">
+        <td class="p-3 border">#</td>
+        <td class="p-3 border">{{ competition.code }}</td>
+        <td class="p-3 border">{{ competition.location }}</td>
+        <td class="p-3 border">{{ competition.date }}</td>
+        <td class="p-3 border">{{ competition.speciesType }}</td>
+        <td class="p-3 border">{{ competition.minParticipants }}</td>
+        <td class="p-3 border">{{ competition.maxParticipants }}</td>
+        <td class="p-3 border">{{ competition.openRegistration }}</td>
+        <td class="p-3 border">
+          <div class="flex space-x-2">
+            <button [routerLink]="['/admin/competitions/edit', competition.id]"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              Edit
+            </button>
+            <button (click)="deleteCompetition(competition.id)"
+                    class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-between items-center mt-4">
+    <button (click)="prevPage()" [disabled]="currentPage === 0"
+            class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+      Prev
+    </button>
+    <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1"
+            class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+      Next
+    </button>
+  </div>
+</div>
+

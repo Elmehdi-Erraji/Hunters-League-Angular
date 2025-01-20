@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth'; // Replace with your API URL
+  private userIdKey = 'user_id';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -17,20 +18,21 @@ export class AuthService {
   }
 
   // Login
-  login(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
-      tap((response: any) => {
-        this.setToken(response);
-        this.redirectUser(response.role); // Redirect based on role
-      })
-    );
-  }
+    login(credentials: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
+        tap((response: any) => {
+          this.setToken(response);
+          this.redirectUser(response.role); // Redirect based on role
+        })
+      );
+    }
 
   // Save tokens and role
   setToken(response: any): void {
     localStorage.setItem('access_token', response.accessToken);
     localStorage.setItem('refresh_token', response.refreshToken);
     localStorage.setItem('role', response.role);
+    localStorage.setItem('user_id', response.id);
   }
 
   // Get access token
@@ -41,6 +43,14 @@ export class AuthService {
   // Get role
   getRole(): string | null {
     return localStorage.getItem('role');
+  }
+
+  getUserId(): string | null {
+    return localStorage.getItem(this.userIdKey);
+  }
+
+  setUserId(userId: string): void {
+    localStorage.setItem(this.userIdKey, userId);
   }
 
   // Check if user is logged in

@@ -1,11 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {AdminDashService} from '../services/admin-dash.service';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  styleUrls: ['./admin-dashboard.component.css'],
+  imports: [
+    DecimalPipe
+  ]
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
+  statistics: any = {
+    competitions: 1000,
+    users: 2007,
+    hunts: 111295739,
+    participations: 2000003,
+  };
+  isLoading: boolean = true;
 
+  constructor(private dashboardService: AdminDashService) {}
+
+  ngOnInit(): void {
+    this.fetchData();
+  }
+
+  fetchData(): void {
+    this.dashboardService.fetchStatistics().subscribe(
+      (data: any) => {
+        this.dashboardService.updateStatistics(data); // Update the service with fetched data
+        this.statistics = this.dashboardService.getStatistics(); // Update the component's statistics
+        this.isLoading = false; // Data has been loaded
+      },
+      (error: any) => {
+        console.error('Error fetching statistics:', error);
+        this.isLoading = false; // Stop loading even if there's an error
+      }
+    );
+  }
 }

@@ -1,0 +1,77 @@
+<div class="p-6 bg-white shadow-lg rounded-lg">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-xl font-bold">Species List</h3>
+  </div>
+
+  <!-- (Optional) Loading Indicator -->
+  <div *ngIf="(loading$ | async)" class="mb-4 text-gray-500">
+    Loading species...
+  </div>
+
+  <!-- Table -->
+  <div class="overflow-x-auto" *ngIf="!(loading$ | async)">
+    <table class="w-full border-collapse">
+      <thead>
+      <tr class="bg-gray-100">
+        <th class="p-3 border">ID</th>
+        <th class="p-3 border">Name</th>
+        <th class="p-3 border">Category</th>
+        <th class="p-3 border">Min Weight (kg)</th>
+        <th class="p-3 border">Difficulty</th>
+        <th class="p-3 border">Points</th>
+        <th class="p-3 border">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- Use the async pipe to unwrap speciesWithColors$ -->
+      <tr
+        *ngFor="let species of (speciesWithColors$ | async)"
+        class="hover:bg-gray-50"
+      >
+        <!-- Adjust these fields if your species object has different property names -->
+        <td class="p-3 border">{{ species.id }}</td>
+        <td class="p-3 border">{{ species.name }}</td>
+        <td class="p-3 border">{{ species.category }}</td>
+        <td class="p-3 border">{{ species.minimumWeight }}</td>
+        <td class="p-3 border">{{ species.difficulty }}</td>
+        <td class="p-3 border">{{ species.points }}</td>
+        <td class="p-3 border">
+          <div class="flex space-x-2">
+            <button
+              [routerLink]="['/admin/species/edit', species.id]"
+              class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600"
+            >
+              Edit
+            </button>
+            <button
+              (click)="deleteSpecies(species.id)"
+              class="bg-gray-500 text-white px-3 py-1 rounded-lg hover:bg-gray-600"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex justify-between items-center mt-4">
+    <button
+      (click)="prevPage()"
+      [disabled]="pageNumber === 0"
+      class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+    >
+      Prev
+    </button>
+    <span>Page {{ pageNumber + 1 }} of {{ totalPages }}</span>
+    <button
+      (click)="nextPage()"
+      [disabled]="pageNumber === totalPages - 1"
+      class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+    >
+      Next
+    </button>
+  </div>
+</div>
