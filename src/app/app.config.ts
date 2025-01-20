@@ -4,6 +4,10 @@ import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from '@angular/c
 
 import { routes } from './app.routes';
 import {AuthInterceptor} from './core/interceptors/auth.interceptor';
+import {provideStore} from '@ngrx/store';
+import {speciesReducer} from './store/species/species.reducer';
+import {provideEffects} from '@ngrx/effects';
+import {SpeciesEffects} from './store/species/species.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +15,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),              // Provides routes
     provideHttpClient(
       withInterceptors([AuthInterceptor])
-    )
+    ),
+    provideStore({
+      species: speciesReducer,
+      // other slices...
+    }),
+    provideEffects([SpeciesEffects]),// <-- NgRx store providers
   ]
 };
