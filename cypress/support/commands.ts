@@ -1,3 +1,4 @@
+/*
 Cypress.Commands.add('loginByAPI', () => {
   cy.request({
     method: 'POST',
@@ -15,3 +16,4 @@ Cypress.Commands.add('loginByAPI', () => {
     });
   });
 });
+*/

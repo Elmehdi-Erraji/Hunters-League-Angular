@@ -10,7 +10,7 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
     imports: [
         DecimalPipe,
         RouterLink,
-        RouterLinkActive
+
     ]
 })
 export class AdminDashboardComponent implements OnInit {
