@@ -1,21 +1,17 @@
-/*
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      customCommand: typeof customCommand;
+Cypress.Commands.add('loginByAPI', () => {
+  cy.request({
+    method: 'POST',
+    url: 'http://localhost:8080/api/auth/login', // Your actual login endpoint
+    body: {
+      username: 'testadmin', // Use a dedicated test user
+      password: 'testpassword'
     }
-  }
-}
-²
-function customCommand(input: MyCustomClass) {
-  // ...
-}
-
-Cypress.Commands.add('loginAsAdmin', () => {
-  cy.visit('/login');
-  cy.get('input[formcontrolname="username"]').type('adminUser');
-  cy.get('input[formcontrolname="password"]').type('adminPass123');
-  cy.get('button[type="submit"]').click();
-  cy.url().should('include', '/admin');
+  }).then((response) => {
+    // Store the token in local storage or as a cookie
+    localStorage.setItem('authToken', response.body.token);
+    // Optional: Set the token in request headers globally
+    Cypress.on('window:before:load', (win) => {
+      win.localStorage.setItem('authToken', response.body.token);
+    });
+  });
 });
-*/

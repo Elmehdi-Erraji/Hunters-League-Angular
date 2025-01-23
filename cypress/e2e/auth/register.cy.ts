@@ -15,7 +15,6 @@ describe('User Registration', () => {
       body: { message: 'Registered successfully' },
     }).as('registerRequest');
 
-    // (B) Fill out the form with valid values
     cy.get('input[formcontrolname="username"]').type('validUser');
     cy.get('input[formcontrolname="password"]').type('validPass123');
     cy.get('input[formcontrolname="firstName"]').type('John');
@@ -24,17 +23,12 @@ describe('User Registration', () => {
     cy.get('input[formcontrolname="email"]').type('john.doe@example.com');
     cy.get('input[formcontrolname="nationality"]').type('American');
 
-    // (C) Submit the form
     cy.get('button[type="submit"]').click();
 
-    // (D) Wait for the request if using intercept
     cy.wait('@registerRequest');
 
-    // (E) Check success message
     cy.contains('Registration Successful!').should('be.visible');
 
-    // (F) The component hides successMessage after 3s and redirects to /login
-    // We'll verify the redirect:
     cy.wait(3000);
     cy.url().should('include', '/login');
   });
@@ -52,10 +46,8 @@ describe('User Registration', () => {
 
     cy.get('button[type="submit"]').click();
 
-    // The form is invalid, so we expect an error message
     cy.contains('Please fill all fields correctly.').should('be.visible');
 
-    // Optionally wait to see if it disappears after 5s
     cy.wait(5000);
     cy.contains('Please fill all fields correctly.').should('not.exist');
   });
@@ -123,7 +115,6 @@ describe('User Registration', () => {
       body: { message: 'Server error' },
     }).as('registerRequest');
 
-    // Fill out the form with valid data
     cy.get('input[formcontrolname="username"]').type('validUser');
     cy.get('input[formcontrolname="password"]').type('validPass123');
     cy.get('input[formcontrolname="firstName"]').type('John');
@@ -136,12 +127,10 @@ describe('User Registration', () => {
     cy.get('button[type="submit"]').click();
     cy.wait('@registerRequest');
 
-    // Expect the error message from your component:
-    // `this.errorMessage = err.error.message || 'Registration failed. Please try again.';`
+
     cy.contains('Server error').should('be.visible');
 
-    // Or if your code displays a generic message
-    // cy.contains('Registration failed. Please try again.').should('be.visible');
+
   });
 
 });
